@@ -21,3 +21,11 @@ def test_config_info_route(tmp_app_with_users):  # NOQA
 
     response = json.loads(r.data.decode("utf-8"))
     assert response == expected_content
+
+
+def test_notify_route(tmp_app_with_users):  # NOQA
+
+    r = tmp_app_with_users.put(
+        "/elastic-search/notify",
+    )
+    assert r.status_code == 200

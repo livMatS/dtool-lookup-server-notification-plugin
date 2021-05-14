@@ -39,11 +39,11 @@ class Config(object):
 
 
 @elastic_search_bp.route("/notify", methods=["PUT"])
-def lookup_dependency_graph_by_default_keys(uuid):
+def notify():
     """List the datasets within the same dependency graph as <uuid>.
     If not all datasets are accessible by the user, an incomplete, disconnected
     graph may arise."""
-    print(request.get_json())
+    print("'notify' route\nJSON:\n", request.get_json())
     return jsonify({})
 
 
