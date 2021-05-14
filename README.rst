@@ -9,7 +9,7 @@ Dtool Lookup Server Elastic-Search Plugin
 Features
 --------
 
-- Listen to elastic search notifications from and S3-compatible storage backend
+- Emulate an elastic search server: Listen to elastic search notifications from an S3-compatible storage backend
 
 
 Introduction
@@ -72,7 +72,7 @@ following XML template
         <Rule>
             <ID>dtool</ID>
             <Status>Enabled</Status>
-            <Prefix>dtool-*</Prefix>
+            <Prefix>dtool-</Prefix>
             <Destination>
                <Urn>urn:mysite:es:::domain-name/notify/all</Urn>
             </Destination>
