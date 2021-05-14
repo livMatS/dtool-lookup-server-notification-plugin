@@ -38,20 +38,19 @@ class Config(object):
         return d
 
 
-@elastic_search_bp.route("/notify", methods=["PUT"])
-def notify():
+@elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])
+def notify(objpath):
     """List the datasets within the same dependency graph as <uuid>.
     If not all datasets are accessible by the user, an incomplete, disconnected
     graph may arise."""
-    print("'notify' route\nJSON:\n", request.get_json())
+    print("'notify'", objpath)
+    print("JSON:\n", request.get_json())
     return jsonify({})
 
 
 @elastic_search_bp.route("/_cluster/health", methods=["GET"])
 def health():
-    """List the datasets within the same dependency graph as <uuid>.
-    If not all datasets are accessible by the user, an incomplete, disconnected
-    graph may arise."""
+    """This route is used to test whether the URI exists."""
     print("'health' route\nJSON:\n", request.get_json())
     return jsonify({})
 

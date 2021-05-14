@@ -51,7 +51,30 @@ TODO
 Configure elastic search integration in NetApp StorageGRID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+Create a new endpoint with URI
+```
+https://myserver:myport/elastic-search
+```
+and URN
+```
+arn:simdata:es:::simdata/dtool/dtool
+```
+
+The bucket needs to be configured to support search integration. Use the
+following XML template
+
+.. code-block:: xml
+
+    <MetadataNotificationConfiguration>
+        <Rule>
+            <ID>dtool</ID>
+            <Status>Enabled</Status>
+            <Prefix></Prefix>
+            <Destination>
+               <Urn>urn:myserver:es:::sgws-notifications/test1/all</Urn>
+            </Destination>
+        </Rule>
+    </MetadataNotificationConfiguration>
 
 
 Querying server plugin configuration
