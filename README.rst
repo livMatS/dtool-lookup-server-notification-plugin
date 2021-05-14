@@ -57,8 +57,11 @@ https://myserver:myport/elastic-search
 ```
 and URN
 ```
-arn:simdata:es:::simdata/dtool/dtool
+arn:<mysite>:es:::<domain-name>/notify/all
 ```
+Note that `<mysite>` and `<domain-name>` can be chose arbitrarily.
+`notify/all` is appended to the URI and must point to the route of
+the notify function.
 
 The bucket needs to be configured to support search integration. Use the
 following XML template
@@ -69,9 +72,9 @@ following XML template
         <Rule>
             <ID>dtool</ID>
             <Status>Enabled</Status>
-            <Prefix></Prefix>
+            <Prefix>dtool-*</Prefix>
             <Destination>
-               <Urn>urn:myserver:es:::sgws-notifications/test1/all</Urn>
+               <Urn>urn:mysite:es:::domain-name/notify/all</Urn>
             </Destination>
         </Rule>
     </MetadataNotificationConfiguration>
