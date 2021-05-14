@@ -1,0 +1,85 @@
+Dtool Lookup Server Elastic-Search Plugin
+=========================================
+
+- GitHub: https://github.com/IMTEK-Simulation/dtool-lookup-server-elastic-search-plugin
+- PyPI: https://pypi.python.org/pypi/dtool-lookup-server-elastic-search-plugin
+- Free software: MIT License
+
+
+Features
+--------
+
+- Listen to elastic search notifications from and S3-compatible storage backend
+
+
+Introduction
+------------
+
+`dtool <https://dtool.readthedocs.io>`_ is a command line tool for packaging
+data and metadata into a dataset. A dtool dataset manages data and metadata
+without the need for a central database.
+
+However, if one has to manage more than a hundred datasets it can be helpful
+to have the datasets' metadata stored in a central server to enable one to
+quickly find datasets of interest.
+
+The `dtool-lookup-server <https://github.com/jic-dtool/dtool-lookup-server>`_
+provides a web API for registering datasets' metadata
+and provides functionality to lookup, list and search for datasets.
+
+This plugin enables the dtool-lookup-server to listen to elastic search
+notifications for the registration and deregistration of datasets.
+
+
+Installation
+------------
+
+Install the dtool lookup server dependency graph plugin
+
+.. code-block:: bash
+
+    $ pip install dtool-lookup-server-elastic-search-plugin
+
+Setup and configuration
+-----------------------
+
+Configure plugin behavior
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TODO
+
+Configure elastic search integration in NetApp StorageGRID
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TODO
+
+
+Querying server plugin configuration
+------------------------------------
+
+The request
+
+.. code-block:: bash
+
+    $ curl -H "$HEADER" http://localhost:5000/es/config
+
+will return the current dependency graph plugin configuration with all keys in lowercase
+
+.. code-block:: json
+
+    {
+      "dependency_keys": [
+        "readme.derived_from.uuid",
+        "annotations.source_dataset_uuid"
+      ],
+      "dynamic_dependency_keys": true,
+      "enable_dependency_view": true,
+      "force_rebuild_dependency_view": false,
+      "mongo_dependency_view_bookkeeping": "dep_views",
+      "mongo_dependency_view_cache_size": 10,
+      "mongo_dependency_view_prefix": "dep:",
+      "version": "0.1.1"
+    }
+
+
+See ``dtool_lookup_server_dependency_graph_plugin.config.Config`` for more information.
