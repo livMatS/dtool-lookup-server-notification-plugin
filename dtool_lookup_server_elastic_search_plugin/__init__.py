@@ -47,6 +47,15 @@ def notify():
     return jsonify({})
 
 
+@elastic_search_bp.route("/_cluster/health", methods=["GET"])
+def health():
+    """List the datasets within the same dependency graph as <uuid>.
+    If not all datasets are accessible by the user, an incomplete, disconnected
+    graph may arise."""
+    print("'health' route\nJSON:\n", request.get_json())
+    return jsonify({})
+
+
 @elastic_search_bp.route("/config", methods=["GET"])
 @jwt_required
 def plugin_config():
