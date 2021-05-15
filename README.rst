@@ -9,7 +9,7 @@ Dtool Lookup Server Elastic-Search Plugin
 Features
 --------
 
-- Emulate an elastic search server: Listen to elastic search notifications from an S3-compatible storage backend
+- Listen to elastic search notifications from an S3-compatible storage backend
 
 
 Introduction
@@ -72,7 +72,7 @@ following XML template
         <Rule>
             <ID>dtool</ID>
             <Status>Enabled</Status>
-            <Prefix>dtool-</Prefix>
+            <Prefix></Prefix>
             <Destination>
                <Urn>urn:mysite:es:::domain-name/notify/all</Urn>
             </Destination>
@@ -87,24 +87,14 @@ The request
 
 .. code-block:: bash
 
-    $ curl -H "$HEADER" http://localhost:5000/es/config
+    $ curl -H "$HEADER" http://localhost:5000/elastic-search/config
 
-will return the current dependency graph plugin configuration with all keys in lowercase
+will return the current elastic-search plugin configuration with all keys in lowercase
 
 .. code-block:: json
 
     {
-      "dependency_keys": [
-        "readme.derived_from.uuid",
-        "annotations.source_dataset_uuid"
-      ],
-      "dynamic_dependency_keys": true,
-      "enable_dependency_view": true,
-      "force_rebuild_dependency_view": false,
-      "mongo_dependency_view_bookkeeping": "dep_views",
-      "mongo_dependency_view_cache_size": 10,
-      "mongo_dependency_view_prefix": "dep:",
-      "version": "0.1.1"
+      "version": "0.1.0"
     }
 
 

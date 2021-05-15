@@ -62,18 +62,20 @@ def notify(objpath):
     # UUID and finalizes creation of a dataset. We can register that dataset
     # now.
     if 'metadata' in json:
-        bucket = json['bucket']
         admin_metadata = json['metadata']
 
-        base_uri = Config.BUCKET_TO_BASE_URI[bucket]
+        if 'name' in admin_metadata and 'uuid' in admin_metadata:
+            bucket = json['bucket']
 
-        dataset_uri = dtoolcore._generate_uri(admin_metadata, base_uri)
+            base_uri = Config.BUCKET_TO_BASE_URI[bucket]
 
-        current_app.logger.info('Registering dataset with URI {}'.format(dataset_uri))
+            dataset_uri = dtoolcore._generate_uri(admin_metadata, base_uri)
 
-        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-        dataset_info = generate_dataset_info(dataset, base_uri)
-        register_dataset(dataset_info)
+            current_app.logger.info('Registering dataset with URI {}'.format(dataset_uri))
+
+            dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+            dataset_info = generate_dataset_info(dataset, base_uri)
+            register_dataset(dataset_info)
 
     return jsonify({})
 
