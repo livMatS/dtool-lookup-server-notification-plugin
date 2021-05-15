@@ -1,6 +1,7 @@
 """Test the /scaffolding/config blueprint route."""
 
 import os
+import yaml
 
 from dtoolcore import ProtoDataSet, generate_admin_metadata
 from dtoolcore import DataSet
@@ -8,6 +9,7 @@ from dtoolcore.utils import generate_identifier, sanitise_uri
 from dtoolcore.storagebroker import DiskStorageBroker
 
 from dtool_lookup_server.utils import (
+    get_readme_from_uri_by_user,
     list_datasets_by_user,
     register_base_uri,
     update_permissions,
@@ -47,7 +49,8 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
         admin_metadata=admin_metadata,
         config_path=None)
     proto_dataset.create()
-    proto_dataset.put_readme('abc: def')
+    readme = 'abc: def'
+    proto_dataset.put_readme(readme)
     proto_dataset.put_item(local_file_path, 'tiny.png')
 
     proto_dataset.freeze()
@@ -62,7 +65,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     # Tell plugin that dataset has been created
     r = tmp_app_with_users.post(
         "/elastic-search/notify/all/{}".format(name),
-        json={'bucket': 'bucket', 'metadata': admin_metadata},
+        json={'bucket': 'bucket', 'metadata': dataset._admin_metadata},
     )
     assert r.status_code == 200
 
@@ -73,3 +76,30 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     assert datasets[0]['uri'] == dest_uri
     assert datasets[0]['uuid'] == admin_metadata['uuid']
     assert datasets[0]['name'] == name
+
+    # Check README
+    check_readme = get_readme_from_uri_by_user('snow-white', dest_uri)
+    assert check_readme == yaml.load(readme)
+
+    # Update README
+    new_readme = 'ghi: jkl'
+    dataset.put_readme(new_readme)
+
+    # Notify plugin about updated name
+    r = tmp_app_with_users.post(
+        "/elastic-search/notify/all/{}".format(name),
+        json={'bucket': 'bucket', 'metadata': dataset._admin_metadata},
+    )
+    assert r.status_code == 200
+
+    # Check dataset
+    datasets = list_datasets_by_user('snow-white')
+    assert len(datasets) == 1
+    assert datasets[0]['base_uri'] == base_uri
+    assert datasets[0]['uri'] == dest_uri
+    assert datasets[0]['uuid'] == admin_metadata['uuid']
+    assert datasets[0]['name'] == name
+
+    # Check that README has actually been changed
+    check_readme = get_readme_from_uri_by_user('snow-white', dest_uri)
+    assert check_readme == yaml.load(new_readme)
