@@ -1,6 +1,8 @@
 import logging
 import random
+import shutil
 import string
+import tempfile
 import os
 import sys
 
@@ -8,6 +10,8 @@ import pytest
 
 # Pytest does not add the working directory to the path so we do it here.
 _HERE = os.path.dirname(os.path.abspath(__file__))
+TEST_SAMPLE_DATA = os.path.join(_HERE, "data")
+
 _ROOT = os.path.join(_HERE, "..")
 sys.path.insert(0, _ROOT)
 
@@ -154,16 +158,26 @@ def compare_marked_nested(A, B, marker):
 
 
 def random_string(
-    size=9,
-    prefix="test_",
-    chars=string.ascii_uppercase + string.ascii_lowercase + string.digits
+        size=9,
+        prefix="test_",
+        chars=string.ascii_uppercase + string.ascii_lowercase + string.digits
 ):
     return prefix + ''.join(random.choice(chars) for _ in range(size))
 
 
 @pytest.fixture
-def tmp_app_with_users(request):
+def tmp_dir_fixture(request):
+    d = tempfile.mkdtemp()
 
+    @request.addfinalizer
+    def teardown():
+        shutil.rmtree(d)
+
+    return d
+
+
+@pytest.fixture
+def tmp_app_with_users(request):
     from dtool_lookup_server import create_app, mongo, sql_db
     from dtool_lookup_server.utils import (
         register_users,
@@ -210,65 +224,6 @@ def tmp_app_with_users(request):
         "users_with_register_permissions": ["grumpy"]
     }
     update_permissions(permissions)
-
-    @request.addfinalizer
-    def teardown():
-        mongo.cx.drop_database(tmp_mongo_db_name)
-        sql_db.session.remove()
-
-    return app.test_client()
-
-    
-@pytest.fixture
-def tmp_app_with_dependent_data(request):
-    from dtool_lookup_server.config import Config
-    from dtool_lookup_server import create_app, mongo, sql_db
-    from dtool_lookup_server.utils import (
-        register_users,
-        register_base_uri,
-        register_dataset,
-        update_permissions,
-    )
-
-    tmp_mongo_db_name = random_string()
-
-    config = {
-        "FLASK_ENV": "development",
-        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-        "MONGO_URI": "mongodb://localhost:27017/{}".format(tmp_mongo_db_name),
-        "SQLALCHEMY_TRACK_MODIFICATIONS": False,
-        "JWT_ALGORITHM": "RS256",
-        "JWT_PUBLIC_KEY": JWT_PUBLIC_KEY,
-        "JWT_TOKEN_LOCATION": "headers",
-        "JWT_HEADER_NAME": "Authorization",
-        "JWT_HEADER_TYPE": "Bearer",
-    }
-
-    app = create_app(config)
-
-    # Ensure the sql database has been put into the context.
-    app.app_context().push()
-
-    # Populate the database.
-    sql_db.Model.metadata.create_all(sql_db.engine)
-
-    # Register some users.
-    username = "grumpy"
-    register_users([
-        dict(username=username),
-    ])
-
-    base_uri = "s3://snow-white"
-    register_base_uri(base_uri)
-    permissions = {
-        "base_uri": base_uri,
-        "users_with_search_permissions": [username],
-        "users_with_register_permissions": [username]
-    }
-    update_permissions(permissions)
-
-    for dataset_info in family_datasets(base_uri):
-        register_dataset(dataset_info)
 
     @request.addfinalizer
     def teardown():

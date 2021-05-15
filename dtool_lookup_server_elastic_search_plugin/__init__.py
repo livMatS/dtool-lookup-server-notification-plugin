@@ -1,6 +1,11 @@
+import json
+import os
+
+import dtoolcore
 from flask import (
     abort,
     Blueprint,
+    current_app,
     jsonify,
     request
 )
@@ -9,6 +14,10 @@ from flask_jwt_extended import (
     get_jwt_identity,
 )
 from dtool_lookup_server import AuthenticationError
+from dtool_lookup_server.utils import (
+    generate_dataset_info,
+    register_dataset,
+)
 
 AFFIRMATIVE_EXPRESSIONS = ['true', '1', 'y', 'yes', 'on']
 
@@ -27,6 +36,10 @@ elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-s
 
 
 class Config(object):
+    BUCKET_TO_BASE_URI = json.loads(
+        os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_BUCKET_TO_BASE_URI',
+                       '{"bucket": ""}'))
+
     @classmethod
     def to_dict(cls):
         """Convert server configuration into dict."""
@@ -43,8 +56,25 @@ def notify(objpath):
     """List the datasets within the same dependency graph as <uuid>.
     If not all datasets are accessible by the user, an incomplete, disconnected
     graph may arise."""
-    print("'notify'", objpath)
-    print("JSON:\n", request.get_json())
+    json = request.get_json()
+
+    # The metadata is only attached to the 'dtool' object of the respective
+    # UUID and finalizes creation of a dataset. We can register that dataset
+    # now.
+    if 'metadata' in json:
+        bucket = json['bucket']
+        admin_metadata = json['metadata']
+
+        base_uri = Config.BUCKET_TO_BASE_URI[bucket]
+
+        dataset_uri = dtoolcore._generate_uri(admin_metadata, base_uri)
+
+        current_app.logger.info('Registering dataset with URI {}'.format(dataset_uri))
+
+        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+        dataset_info = generate_dataset_info(dataset, base_uri)
+        register_dataset(dataset_info)
+
     return jsonify({})
 
 
