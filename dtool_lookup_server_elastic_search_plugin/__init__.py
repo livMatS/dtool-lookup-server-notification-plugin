@@ -38,7 +38,7 @@ elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-s
 class Config(object):
     BUCKET_TO_BASE_URI = json.loads(
         os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_BUCKET_TO_BASE_URI',
-                       '{"bucket": ""}'))
+                       '{"bucket": "s3://bucket"}'))
 
     @classmethod
     def to_dict(cls):
