@@ -47,9 +47,13 @@ elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-s
 
 
 class Config(object):
+    # Dictionary for conversion of bucket names to base URIs
     BUCKET_TO_BASE_URI = json.loads(
         os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_BUCKET_TO_BASE_URI',
                        '{"bucket": "s3://bucket"}'))
+
+    # Limit notification access to IPs starting with this string
+    REMOTE_ADDR = os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_REMOTE_ADDR', '')
 
     @classmethod
     def to_dict(cls):
@@ -66,6 +70,9 @@ class Config(object):
 def notify_create_or_update(objpath):
     """Notify the lookup server about creation of a new object or modification
     of an object's metadata."""
+    if not request.remote_addr.startswith(Config.REMOTE_ADDR):
+        abort(405)
+
     json = request.get_json()
 
     # The metadata is only attached to the 'dtool' object of the respective
@@ -122,6 +129,8 @@ def delete_dataset(base_uri, uuid):
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])
 def notify_delete(objpath):
     """Notify the lookup server about deletion of an object."""
+    if not request.remote_addr.startswith(Config.REMOTE_ADDR):
+        abort(405)
 
     # The only information that we get is the URL. We need to convert the URL
     # into the respective UUID of the dataset.
