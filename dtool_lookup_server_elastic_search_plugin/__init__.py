@@ -66,6 +66,57 @@ class Config(object):
         return d
 
 
+def _parse_objpath(objpath):
+    """
+    Extract base URI and UUID from the URL. The URL has the form
+        https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
+    or
+        https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
+    The objpath is the last part of the URL that follows /notify/all/.
+    """
+    base_uri = None
+    objpath_without_bucket = None
+    for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
+        if objpath.startswith(bucket):
+            base_uri = uri
+            # +1 because there is an underscore after the bucket name
+            objpath_without_bucket = objpath[len(bucket)+1:]
+
+    components = objpath_without_bucket.split('/')
+    if components[-2] in ['data', 'tags', 'annotations']:
+        # The UUID is the component before 'data'
+        uuid = components[-3]
+        kind = components[-2]
+    else:
+        # No data entry, the UUID is the second to last component
+        uuid = components[-2]
+        kind = components[-1]
+
+    return base_uri, uuid, kind
+
+
+def _retrieve_uri(base_uri, uuid):
+    """Retrieve URI(s) from database given as base URI and an UUID"""
+    if not base_uri_exists(base_uri):
+        raise(ValidationError(
+            "Base URI is not registered: {}".format(base_uri)
+        ))
+
+    # Query database to construct the respective URI. We cannot just
+    # concatenate base URI and UUID since the URI may depend on the name of
+    # the dataset which we do not have.
+    uris = []
+    query_result = sql_db.session.query(Dataset, BaseURI)  \
+        .filter(Dataset.uuid == uuid)  \
+        .filter(BaseURI.id == Dataset.base_uri_id)  \
+        .filter(BaseURI.base_uri == base_uri)
+    for dataset, base_uri in query_result:
+        return dtoolcore._generate_uri(
+            {'uuid': dataset.uuid, 'name': dataset.name}, base_uri.base_uri)
+
+    return None
+
+
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])
 def notify_create_or_update(objpath):
     """Notify the lookup server about creation of a new object or modification
@@ -74,6 +125,8 @@ def notify_create_or_update(objpath):
         abort(405)
 
     json = request.get_json()
+
+    dataset_uri = None
 
     # The metadata is only attached to the 'dtool' object of the respective
     # UUID and finalizes creation of a dataset. We can register that dataset
@@ -89,41 +142,33 @@ def notify_create_or_update(objpath):
             dataset_uri = dtoolcore._generate_uri(admin_metadata, base_uri)
 
             current_app.logger.info('Registering dataset with URI {}'.format(dataset_uri))
+    else:
+        base_uri, uuid, kind = _parse_objpath(objpath)
+        # We also need to update the database if the metadata has changed.
+        if kind in ['README.yml', 'tags', 'annotations']:
+            dataset_uri = _retrieve_uri(base_uri, uuid)
 
-            dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-            dataset_info = generate_dataset_info(dataset, base_uri)
-            register_dataset(dataset_info)
+    if dataset_uri is not None:
+        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+        dataset_info = generate_dataset_info(dataset, base_uri)
+        register_dataset(dataset_info)
 
     return jsonify({})
 
 
 def delete_dataset(base_uri, uuid):
     """Delete a dataset in the lookup server."""
-    if not base_uri_exists(base_uri):
-        raise(ValidationError(
-            "Base URI is not registered: {}".format(base_uri)
-        ))
-
-    # Query database to construct the respective URI
-    uris = []
-    query_result = sql_db.session.query(Dataset, BaseURI)  \
-        .filter(Dataset.uuid == uuid)  \
-        .filter(BaseURI.id == Dataset.base_uri_id)  \
-        .filter(BaseURI.base_uri == base_uri)
-    for dataset, base_uri in query_result:
-        uris += [dtoolcore._generate_uri(
-            {'uuid': dataset.uuid, 'name': dataset.name}, base_uri.base_uri)]
-
-    current_app.logger.info('Deleting datasets with URIs {}'.format(uris))
+    uri = _retrieve_uri(base_uri, uuid)
+    current_app.logger.info('Deleting dataset with URI {}'.format(uri))
 
     # Delete datasets with this URI
     sql_db.session.query(Dataset)  \
-        .filter(Dataset.uri.in_(uris))  \
+        .filter(Dataset.uri == uri)  \
         .delete()
     sql_db.session.commit()
 
     # Remove from Mongo database
-    mongo.db[MONGO_COLLECTION].remove({"uri": {"$in": uris}})
+    mongo.db[MONGO_COLLECTION].remove({"uri": {"$eq": uri}})
 
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])
@@ -138,15 +183,8 @@ def notify_delete(objpath):
 
     # Delete dataset if the `dtool` object is deleted
     if url.endswith('/dtool'):
-        # The URL has the form
-        #     https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
-        # or
-        #     https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
-        uuid = objpath[-42:-6]
-        base_uri = None
-        for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
-            if objpath.startswith(bucket):
-                base_uri = uri
+        base_uri, uuid, kind = _parse_objpath(objpath)
+        assert kind == 'dtool'
         delete_dataset(base_uri, uuid)
 
     return jsonify({})
