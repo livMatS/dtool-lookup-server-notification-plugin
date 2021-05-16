@@ -22,6 +22,8 @@ snowwhite_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZTk0MzMzMi0w
 
 
 def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
+    bucket_name = 'bucket'
+
     # Add local directory as base URI and assign URI to the bucket
     base_uri = sanitise_uri(tmp_dir_fixture)
     register_base_uri(base_uri)
@@ -30,7 +32,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
         'users_with_search_permissions': ['snow-white'],
         'users_with_register_permissions': ['snow-white'],
     })
-    Config.BUCKET_TO_BASE_URI['bucket'] = base_uri
+    Config.BUCKET_TO_BASE_URI[bucket_name] = base_uri
 
     # Create test dataset
     name = "my_dataset"
@@ -65,7 +67,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     # Tell plugin that dataset has been created
     r = tmp_app_with_users.post(
         "/elastic-search/notify/all/{}".format(name),
-        json={'bucket': 'bucket', 'metadata': dataset._admin_metadata},
+        json={'bucket': bucket_name, 'metadata': dataset._admin_metadata},
     )
     assert r.status_code == 200
 
@@ -88,7 +90,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     # Notify plugin about updated name
     r = tmp_app_with_users.post(
         "/elastic-search/notify/all/{}".format(name),
-        json={'bucket': 'bucket', 'metadata': dataset._admin_metadata},
+        json={'bucket': bucket_name, 'metadata': dataset._admin_metadata},
     )
     assert r.status_code == 200
 
@@ -103,3 +105,9 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     # Check that README has actually been changed
     check_readme = get_readme_from_uri_by_user('snow-white', dest_uri)
     assert check_readme == yaml.load(new_readme)
+
+    # Tell plugin that dataset has been deleted
+    r = tmp_app_with_users.delete(
+        "/elastic-search/notify/all/{}_{}/dtool".format(bucket_name, admin_metadata['uuid'])
+    )
+    assert r.status_code == 200

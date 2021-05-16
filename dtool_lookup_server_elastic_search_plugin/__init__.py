@@ -13,8 +13,19 @@ from flask_jwt_extended import (
     jwt_required,
     get_jwt_identity,
 )
-from dtool_lookup_server import AuthenticationError
+from dtool_lookup_server import (
+    mongo,
+    sql_db,
+    AuthenticationError,
+    ValidationError,
+    MONGO_COLLECTION,
+)
+from dtool_lookup_server.sql_models import (
+    BaseURI,
+    Dataset,
+)
 from dtool_lookup_server.utils import (
+    base_uri_exists,
     generate_dataset_info,
     register_dataset,
 )
@@ -79,13 +90,42 @@ def notify_create_or_update(objpath):
     return jsonify({})
 
 
+def delete_dataset(base_uri, uuid):
+    """Delete a dataset in the lookup server."""
+    if not base_uri_exists(base_uri):
+        raise(ValidationError(
+            "Base URI is not registered: {}".format(base_uri)
+        ))
+
+    # Remove from SQL database
+    sql_db.session.query(Dataset)  \
+        .filter(Dataset.uuid == uuid)  \
+        .delete()
+
+    # Remove from Mongo database
+    mongo.db[MONGO_COLLECTION].remove({"uuid": {"$eq": uuid}}, True)
+
+
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])
 def notify_delete(objpath):
     """Notify the lookup server about deletion of an object."""
-    json = request.get_json()
 
-    print('DELETE request')
-    print(json)
+    # The only information that we get is the URL. We need to convert the URL
+    # into the respective UUID of the dataset.
+    url = request.url
+
+    # Delete dataset if the `dtool` object is deleted
+    if url.endswith('/dtool'):
+        # The URL has the form
+        #     https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
+        # or
+        #     https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
+        uuid = objpath[-42:-6]
+        base_uri = None
+        for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
+            if objpath.startswith(bucket):
+                base_uri = uri
+        delete_dataset(base_uri, uuid)
 
     return jsonify({})
 
