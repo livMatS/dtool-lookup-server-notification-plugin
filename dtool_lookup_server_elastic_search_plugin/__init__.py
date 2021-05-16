@@ -107,6 +107,8 @@ def delete_dataset(base_uri, uuid):
         uris += [dtoolcore._generate_uri(
             {'uuid': dataset.uuid, 'name': dataset.name}, base_uri.base_uri)]
 
+    print('Deleting the following URIs:', uris)
+
     # Delete datasets with this URI
     sql_db.session.query(Dataset)  \
         .filter(Dataset.uri.in_(uris))  \
