@@ -97,13 +97,23 @@ def delete_dataset(base_uri, uuid):
             "Base URI is not registered: {}".format(base_uri)
         ))
 
-    # Remove from SQL database
-    sql_db.session.query(Dataset)  \
+    # Query database to construct the respective URI
+    uris = []
+    query_result = sql_db.session.query(Dataset, BaseURI)  \
         .filter(Dataset.uuid == uuid)  \
+        .filter(BaseURI.id == Dataset.base_uri_id)  \
+        .filter(BaseURI.base_uri == base_uri)
+    for dataset, base_uri in query_result:
+        uris += [dtoolcore._generate_uri(
+            {'uuid': dataset.uuid, 'name': dataset.name}, base_uri.base_uri)]
+
+    # Delete datasets with this URI
+    sql_db.session.query(Dataset)  \
+        .filter(Dataset.uri.in_(uris))  \
         .delete()
 
     # Remove from Mongo database
-    mongo.db[MONGO_COLLECTION].remove({"uuid": {"$eq": uuid}}, True)
+    mongo.db[MONGO_COLLECTION].remove({"uri": {"$in": uris}})
 
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])

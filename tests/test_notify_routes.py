@@ -111,3 +111,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
         "/elastic-search/notify/all/{}_{}/dtool".format(bucket_name, admin_metadata['uuid'])
     )
     assert r.status_code == 200
+
+    # Check that dataset has been deleted
+    datasets = list_datasets_by_user('snow-white')
+    assert len(datasets) == 0
