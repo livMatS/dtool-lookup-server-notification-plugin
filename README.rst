@@ -46,7 +46,18 @@ Setup and configuration
 Configure plugin behavior
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The plugin needs to know how to convert a bucket name into a base URI. The
+environment variable `DTOOL_LOOKUP_SERVER_NOTIFY_BUCKET_TO_BASE_URI` is used
+to specify that conversion, e.g.::
+
+    DTOOL_LOOKUP_SERVER_NOTIFY_BUCKET_TO_BASE_URI={"bucket": "ecs://bucket"}
+
+It is also advisable to limit access to the notification listener to a certain
+IP range. Use::
+
+    DTOOL_LOOKUP_SERVER_NOTIFY_REMOTE_ADDR=1.2.3.4
+
+to specify the allowed remote address.
 
 Configure elastic search integration in NetApp StorageGRID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
