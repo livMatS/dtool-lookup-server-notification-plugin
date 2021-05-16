@@ -53,9 +53,8 @@ class Config(object):
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])
 def notify(objpath):
-    """List the datasets within the same dependency graph as <uuid>.
-    If not all datasets are accessible by the user, an incomplete, disconnected
-    graph may arise."""
+    """Notify the lookup server about creation of a new object or modification
+    of an object's metadata."""
     json = request.get_json()
 
     # The metadata is only attached to the 'dtool' object of the respective
@@ -82,16 +81,14 @@ def notify(objpath):
 
 @elastic_search_bp.route("/_cluster/health", methods=["GET"])
 def health():
-    """This route is used to test whether the URI exists."""
-    print("'health' route\nJSON:\n", request.get_json())
+    """This route is used by the S3 storage to test whether the URI exists."""
     return jsonify({})
 
 
 @elastic_search_bp.route("/config", methods=["GET"])
 @jwt_required
 def plugin_config():
-    """Return the JSON-serialized elastic-search plugin configuration."""
-    username = get_jwt_identity()
+    """Return the JSON-serialized elastic search plugin configuration."""
     try:
         config = Config.to_dict()
     except AuthenticationError:
