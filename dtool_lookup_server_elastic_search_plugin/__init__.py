@@ -52,7 +52,7 @@ class Config(object):
 
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])
-def notify(objpath):
+def notify_create_or_update(objpath):
     """Notify the lookup server about creation of a new object or modification
     of an object's metadata."""
     json = request.get_json()
@@ -75,6 +75,17 @@ def notify(objpath):
             dataset = dtoolcore.DataSet.from_uri(dataset_uri)
             dataset_info = generate_dataset_info(dataset, base_uri)
             register_dataset(dataset_info)
+
+    return jsonify({})
+
+
+@elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])
+def notify_delete(objpath):
+    """Notify the lookup server about deletion of an object."""
+    json = request.get_json()
+
+    print('DELETE request')
+    print(json)
 
     return jsonify({})
 
