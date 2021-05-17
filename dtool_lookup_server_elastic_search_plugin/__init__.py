@@ -1,5 +1,7 @@
+import ipaddress
 import json
 import os
+from functools import wraps
 
 import dtoolcore
 from flask import (
@@ -11,7 +13,6 @@ from flask import (
 )
 from flask_jwt_extended import (
     jwt_required,
-    get_jwt_identity,
 )
 from dtool_lookup_server import (
     mongo,
@@ -53,7 +54,9 @@ class Config(object):
                        '{"bucket": "s3://bucket"}'))
 
     # Limit notification access to IPs starting with this string
-    REMOTE_ADDR = os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_REMOTE_ADDR', '')
+    ALLOW_ACCESS_FROM = ipaddress.ip_network(
+        os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_ALLOW_ACCESS_FROM',
+                       '0.0.0.0/0'))  # Default is access from any IP
 
     @classmethod
     def to_dict(cls):
@@ -62,8 +65,23 @@ class Config(object):
         for k, v in cls.__dict__.items():
             # select only capitalized fields
             if k.upper() == k:
+                if isinstance(v, ipaddress.IPv4Network) or \
+                        isinstance(v, ipaddress.IPv6Network):
+                    v = str(v)
                 d[k.lower()] = v
         return d
+
+
+def filter_ips(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        if ipaddress.ip_address(request.remote_addr) in \
+                Config.ALLOW_ACCESS_FROM:
+            return f(*args, **kwargs)
+        else:
+            return abort(403)
+
+    return wrapped
 
 
 def _parse_objpath(objpath):
@@ -118,13 +136,13 @@ def _retrieve_uri(base_uri, uuid):
 
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])
+@filter_ips
 def notify_create_or_update(objpath):
     """Notify the lookup server about creation of a new object or modification
     of an object's metadata."""
-    if not request.remote_addr.startswith(Config.REMOTE_ADDR):
-        abort(405)
-
     json = request.get_json()
+    if json is None:
+        abort(400)
 
     dataset_uri = None
 
@@ -172,11 +190,9 @@ def delete_dataset(base_uri, uuid):
 
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])
+@filter_ips
 def notify_delete(objpath):
     """Notify the lookup server about deletion of an object."""
-    if not request.remote_addr.startswith(Config.REMOTE_ADDR):
-        abort(405)
-
     # The only information that we get is the URL. We need to convert the URL
     # into the respective UUID of the dataset.
     url = request.url

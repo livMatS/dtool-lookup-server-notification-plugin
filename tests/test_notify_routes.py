@@ -1,5 +1,5 @@
 """Test the /scaffolding/config blueprint route."""
-
+import ipaddress
 import os
 import yaml
 
@@ -115,3 +115,18 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     # Check that dataset has been deleted
     datasets = list_datasets_by_user('snow-white')
     assert len(datasets) == 0
+
+
+def test_access_restriction(tmp_app_with_users):
+    # Remote address in test is 127.0.0.1
+    Config.ALLOW_ACCESS_FROM = ipaddress.ip_network("1.2.3.4")
+
+    r = tmp_app_with_users.post(
+        "/elastic-search/notify/all/test_access_restriction"
+    )
+    assert r.status_code == 403  # Forbidden
+
+    r = tmp_app_with_users.delete(
+        "/elastic-search/notify/all/test_access_restriction"
+    )
+    assert r.status_code == 403  # Forbidden

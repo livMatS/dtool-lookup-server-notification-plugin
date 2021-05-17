@@ -55,9 +55,11 @@ to specify that conversion, e.g.::
 It is also advisable to limit access to the notification listener to a certain
 IP range. Use::
 
-    DTOOL_LOOKUP_SERVER_NOTIFY_REMOTE_ADDR=1.2.3.4
+    DTOOL_LOOKUP_SERVER_NOTIFY_ALLOW_ACCESS_FROM=192.168.0.0/16
 
-to specify the allowed remote address.
+to specify the allowed remote network. To specify a single IP, use::
+
+    DTOOL_LOOKUP_SERVER_NOTIFY_ALLOW_ACCESS_FROM=192.168.1.1/32
 
 Configure elastic search integration in NetApp StorageGRID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -105,6 +107,8 @@ will return the current elastic-search plugin configuration with all keys in low
 .. code-block:: json
 
     {
+      "allow_access_from": "0.0.0.0/0",
+      "bucket_to_base_uri": {"bucket": "s3://bucket"},
       "version": "0.1.0"
     }
 

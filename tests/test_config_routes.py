@@ -17,8 +17,8 @@ def test_config_info_route(tmp_app_with_users):  # NOQA
     assert r.status_code == 200
 
     expected_content = {
+        "allow_access_from": "0.0.0.0/0",
         "bucket_to_base_uri": {"bucket": "s3://bucket"},
-        "remote_addr": "",
         "version": dtool_lookup_server_elastic_search_plugin.__version__}
 
     response = json.loads(r.data.decode("utf-8"))
