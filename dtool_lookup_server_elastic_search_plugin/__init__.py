@@ -101,14 +101,21 @@ def _parse_objpath(objpath):
             objpath_without_bucket = objpath[len(bucket)+1:]
 
     components = objpath_without_bucket.split('/')
-    if components[-2] in ['data', 'tags', 'annotations']:
-        # The UUID is the component before 'data'
-        uuid = components[-3]
-        kind = components[-2]
+    if len(components) > 1:
+        if components[-2] in ['data', 'tags', 'annotations']:
+            # The UUID is the component before 'data'
+            uuid = components[-3]
+            kind = components[-2]
+        else:
+            # No data entry, the UUID is the second to last component
+            uuid = components[-2]
+            kind = components[-1]
     else:
-        # No data entry, the UUID is the second to last component
-        uuid = components[-2]
-        kind = components[-1]
+        kind = None
+        uuid = None
+        if components[0].startswith('dtool-'):
+            # This is the registration key
+            uuid = components[0][6:]
 
     return base_uri, uuid, kind
 
@@ -159,7 +166,8 @@ def notify_create_or_update(objpath):
 
             dataset_uri = dtoolcore._generate_uri(admin_metadata, base_uri)
 
-            current_app.logger.info('Registering dataset with URI {}'.format(dataset_uri))
+            current_app.logger.info('Registering dataset with URI {}'
+                                    .format(dataset_uri))
     else:
         base_uri, uuid, kind = _parse_objpath(objpath)
         # We also need to update the database if the metadata has changed.
@@ -167,9 +175,18 @@ def notify_create_or_update(objpath):
             dataset_uri = _retrieve_uri(base_uri, uuid)
 
     if dataset_uri is not None:
-        dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-        dataset_info = generate_dataset_info(dataset, base_uri)
-        register_dataset(dataset_info)
+        try:
+            dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+            dataset_info = generate_dataset_info(dataset, base_uri)
+            register_dataset(dataset_info)
+        except dtoolcore.DtoolCoreTypeError:
+            # DtoolCoreTypeError is raised if this is not a dataset yet, i.e.
+            # if the dataset has only partially been copied. There will be
+            # another notification once everything is final. We simply
+            # ignore this.
+            current_app.logger.debug('DtoolCoreTypeError raised for dataset '
+                                     'with URI {}'.format(dataset_uri))
+            pass
 
     return jsonify({})
 

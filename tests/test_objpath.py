@@ -36,3 +36,9 @@ def test_parse_objpath():
     assert base_uri == my_base_uri
     assert uuid == 'a7e3405b-5efa-49ca-95d3-4068190d50a2'
     assert kind == 'annotations'
+
+    base_uri, uuid, kind = _parse_objpath(
+        'frct-simdata_dtool-f8784b1e-ba60-4200-baa7-397856fe83ec')
+    assert base_uri == my_base_uri
+    assert uuid == 'f8784b1e-ba60-4200-baa7-397856fe83ec'
+    assert kind is None
