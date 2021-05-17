@@ -111,11 +111,13 @@ def _parse_objpath(objpath):
             uuid = components[-2]
             kind = components[-1]
     else:
-        kind = None
-        uuid = None
         if components[0].startswith('dtool-'):
             # This is the registration key
             uuid = components[0][6:]
+            kind = '__REGISTRATION_KEY__'
+        else:
+            kind = None
+            uuid = None
 
     return base_uri, uuid, kind
 

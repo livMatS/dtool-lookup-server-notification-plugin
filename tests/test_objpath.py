@@ -41,4 +41,4 @@ def test_parse_objpath():
         'frct-simdata_dtool-f8784b1e-ba60-4200-baa7-397856fe83ec')
     assert base_uri == my_base_uri
     assert uuid == 'f8784b1e-ba60-4200-baa7-397856fe83ec'
-    assert kind is None
+    assert kind == '__REGISTRATION_KEY__'
