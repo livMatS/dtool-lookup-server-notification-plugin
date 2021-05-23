@@ -114,3 +114,9 @@ will return the current notification plugin configuration with all keys in lower
 
 
 See ``dtool_lookup_server_dependency_graph_plugin.config.Config`` for more information.
+
+Related repositories
+--------------------
+
+- `dtool-s3 <https://github.com/jic-dtool/dtool-s3>`_ - storage broker interface to S3 object storage
+- `dtool-ecs <https://github.com/jic-dtool/dtool-ecs>`_ - storage broker interface to ECS S3 object storage
