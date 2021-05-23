@@ -9,7 +9,7 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8]
         mongodb-version: [4.0, 4.2]
-        dtool-lookup-server-version: [0.17.1]
+        dtool-lookup-server-version: [0.17.2]
 
     steps:
     - name: Git checkout

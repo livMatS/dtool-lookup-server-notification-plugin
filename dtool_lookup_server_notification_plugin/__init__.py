@@ -232,7 +232,7 @@ def health():
 
 
 @elastic_search_bp.route("/config", methods=["GET"])
-@jwt_required
+@jwt_required()
 def plugin_config():
     """Return the JSON-serialized elastic search plugin configuration."""
     try:
