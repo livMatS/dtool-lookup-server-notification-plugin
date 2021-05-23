@@ -1,8 +1,8 @@
-Dtool Lookup Server Elastic-Search Plugin
-=========================================
+Dtool Lookup Server Notification Plugin
+=======================================
 
-- GitHub: https://github.com/IMTEK-Simulation/dtool-lookup-server-elastic-search-plugin
-- PyPI: https://pypi.python.org/pypi/dtool-lookup-server-elastic-search-plugin
+- GitHub: https://github.com/IMTEK-Simulation/dtool-lookup-server-notification-plugin
+- PyPI: https://pypi.python.org/pypi/dtool-lookup-server-notification-plugin
 - Free software: MIT License
 
 
@@ -38,7 +38,7 @@ Install the dtool lookup server dependency graph plugin
 
 .. code-block:: bash
 
-    $ pip install dtool-lookup-server-elastic-search-plugin
+    $ pip install dtool-lookup-server-notification-plugin
 
 Setup and configuration
 -----------------------
@@ -102,7 +102,7 @@ The request
 
     $ curl -H "$HEADER" http://localhost:5000/elastic-search/config
 
-will return the current elastic-search plugin configuration with all keys in lowercase
+will return the current notification plugin configuration with all keys in lowercase
 
 .. code-block:: json
 

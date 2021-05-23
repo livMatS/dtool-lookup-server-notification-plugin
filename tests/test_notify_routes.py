@@ -14,7 +14,7 @@ from dtool_lookup_server.utils import (
     register_base_uri,
     update_permissions,
 )
-from dtool_lookup_server_elastic_search_plugin import Config
+from dtool_lookup_server_notification_plugin import Config
 
 from . import tmp_app_with_users, tmp_dir_fixture, TEST_SAMPLE_DATA  # NOQA
 

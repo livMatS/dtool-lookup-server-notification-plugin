@@ -1,7 +1,7 @@
 """Test the /scaffolding/config blueprint route."""
 
 import json
-import dtool_lookup_server_elastic_search_plugin
+import dtool_lookup_server_notification_plugin
 
 from . import tmp_app_with_users  # NOQA
 
@@ -19,7 +19,7 @@ def test_config_info_route(tmp_app_with_users):  # NOQA
     expected_content = {
         "allow_access_from": "0.0.0.0/0",
         "bucket_to_base_uri": {"bucket": "s3://bucket"},
-        "version": dtool_lookup_server_elastic_search_plugin.__version__}
+        "version": dtool_lookup_server_notification_plugin.__version__}
 
     response = json.loads(r.data.decode("utf-8"))
     assert response == expected_content
