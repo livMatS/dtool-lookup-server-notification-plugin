@@ -1,6 +1,6 @@
 """Test conversion of URL to base URI and UUID"""
 
-from dtool_lookup_server_elastic_search_plugin import Config, _parse_objpath
+from dtool_lookup_server_notification_plugin import Config, _parse_objpath
 
 
 def test_parse_objpath():

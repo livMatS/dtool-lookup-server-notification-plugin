@@ -7,12 +7,12 @@ def local_scheme(version):
     to be able to upload to Test PyPI"""
     return ""
 
-url = "https://github.com/IMTEK-Simulation/dtool-lookup-server-elastic-search-plugin"
+url = "https://github.com/IMTEK-Simulation/dtool-lookup-server-notification-plugin"
 readme = open('README.rst').read()
 
 setup(
-    name="dtool-lookup-server-elastic-search-plugin",
-    packages=["dtool_lookup_server_elastic_search_plugin"],
+    name="dtool-lookup-server-notification-plugin",
+    packages=["dtool_lookup_server_notification_plugin"],
     description="dtool lookup server plugin for receiving elastic-search update notifications",
     long_description=readme,
     author="Lars Pastewka",
@@ -21,7 +21,7 @@ setup(
     url=url,
     entry_points={
         'dtool_lookup_server.blueprints': [
-            'dtool_lookup_server_elastic_search_plugin=dtool_lookup_server_elastic_search_plugin:elastic_search_bp',
+            'dtool_lookup_server_notification_plugin=dtool_lookup_server_notification_plugin:elastic_search_bp',
         ],
     },
     setup_requires=['setuptools_scm'],
