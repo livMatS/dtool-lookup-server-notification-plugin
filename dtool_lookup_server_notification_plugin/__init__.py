@@ -1,4 +1,6 @@
 import ipaddress
+import json
+import logging
 from functools import wraps
 
 import dtoolcore
@@ -44,6 +46,14 @@ if __version__ is None:
 from .config import Config
 
 AFFIRMATIVE_EXPRESSIONS = ['true', '1', 'y', 'yes', 'on']
+
+logger = logging.getLogger(__name__)
+
+
+def _log_nested(log_func, dct):
+    for l in json.dumps(dct, indent=2, default=str).splitlines():
+        log_func(l)
+
 
 def filter_ips(f):
     @wraps(f)
@@ -116,6 +126,9 @@ def _retrieve_uri(base_uri, uuid):
         .filter(Dataset.uuid == uuid)  \
         .filter(BaseURI.id == Dataset.base_uri_id)  \
         .filter(BaseURI.base_uri == base_uri)
+    logger.debug("Query result:")
+    _log_nested(logger.debug, query_result)
+
     for dataset, base_uri in query_result:
         return dtoolcore._generate_uri(
             {'uuid': dataset.uuid, 'name': dataset.name}, base_uri.base_uri)
@@ -137,18 +150,3 @@ def delete_dataset(base_uri, uuid):
     # Remove from Mongo database
     # https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html#pymongo.collection.Collection.delete_one
     mongo.db[MONGO_COLLECTION].delete_one({"uri": {"$eq": uri}})
-
-
-from dtool_lookup_server import AuthenticationError
-from flask_jwt_extended import jwt_required
-from flask import jsonify
-
-#@elastic_search_bp.route("/config", methods=["GET"])
-#@jwt_required()
-#def plugin_config():
-#    """Return the JSON-serialized elastic search plugin configuration."""
-#    try:
-#        config = Config.to_dict()
-#    except AuthenticationError:
-#        abort(401)
-#    return jsonify(config)

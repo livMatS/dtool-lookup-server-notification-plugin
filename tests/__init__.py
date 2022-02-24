@@ -1,4 +1,5 @@
 import logging
+import json
 import random
 import shutil
 import string
@@ -233,3 +234,13 @@ def tmp_app_with_users(request):
         sql_db.session.remove()
 
     return app.test_client()
+
+
+@pytest.fixture
+def request_json(request):
+    fpath = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), 'data', 'mock_event.json')
+    with open(fpath, 'r') as f:
+        request_json = json.load(f)
+
+    return request_json

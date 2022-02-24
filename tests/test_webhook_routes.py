@@ -1,6 +1,9 @@
-"""Test the /elastic-search/notify/* blueprint routes."""
+"""Test the /webhook/notify blueprint route."""
 import ipaddress
+import json
 import os
+import urllib.parse
+
 import yaml
 
 from dtoolcore import ProtoDataSet, generate_admin_metadata
@@ -16,9 +19,15 @@ from dtool_lookup_server.utils import (
 )
 from dtool_lookup_server_notification_plugin import Config
 
-from . import tmp_app_with_users, tmp_dir_fixture, TEST_SAMPLE_DATA  # NOQA
+from . import (
+    tmp_app_with_users,
+    tmp_dir_fixture,
+    request_json,
+    TEST_SAMPLE_DATA
+) # NOQA
 
-def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
+
+def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json):  # NOQA
     bucket_name = 'bucket'
 
     # Add local directory as base URI and assign URI to the bucket
@@ -61,11 +70,14 @@ def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQ
     assert expected_identifier in dataset.identifiers
     assert len(dataset.identifiers) == 1
 
+    # modify mock event to match our temporary dataset
+    request_json['Records'][0]['eventName'] = 's3:ObjectCreated:Put'
+    request_json['Records'][0]['s3']['bucket']['name'] = bucket_name
+    # notification plugin will try to register dataset when README.yml created or changed
+    request_json['Records'][0]['s3']['object']['key'] = urllib.parse.quote('my_dataset/README.yml')
+
     # Tell plugin that dataset has been created
-    r = tmp_app_with_users.post(
-        "/elastic-search/notify/all/{}".format(name),
-        json={'bucket': bucket_name, 'metadata': dataset._admin_metadata},
-    )
+    r = tmp_app_with_users.post("/webhook/notify", json=request_json)
     assert r.status_code == 200
 
     # Check that dataset has actually been registered
@@ -85,10 +97,7 @@ def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQ
     dataset.put_readme(new_readme)
 
     # Notify plugin about updated name
-    r = tmp_app_with_users.post(
-        "/elastic-search/notify/all/{}".format(name),
-        json={'bucket': bucket_name, 'metadata': dataset._admin_metadata},
-    )
+    r = tmp_app_with_users.post("/webhook/notify", json=request_json)
     assert r.status_code == 200
 
     # Check dataset
@@ -103,10 +112,11 @@ def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQ
     check_readme = get_readme_from_uri_by_user('snow-white', dest_uri)
     assert check_readme == yaml.safe_load(new_readme)
 
-    # Tell plugin that dataset has been deleted
-    r = tmp_app_with_users.delete(
-        "/elastic-search/notify/all/{}_{}/dtool".format(bucket_name, admin_metadata['uuid'])
-    )
+    # notification plugin will try to remove dataset from index
+    # # when the dtool object is deleted
+    request_json['Records'][0]['eventName'] = 's3:ObjectRemoved:Delete'
+    request_json['Records'][0]['s3']['object']['key'] = urllib.parse.quote('my_dataset/dtool')
+    r = tmp_app_with_users.post("/webhook/notify", json=request_json)
     assert r.status_code == 200
 
     # Check that dataset has been deleted
@@ -114,16 +124,12 @@ def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQ
     assert len(datasets) == 0
 
 
-def test_elasticsearch_access_restriction(tmp_app_with_users):
+def test_access_restriction(tmp_app_with_users, request_json):
     # Remote address in test is 127.0.0.1
     Config.ALLOW_ACCESS_FROM = ipaddress.ip_network("1.2.3.4")
 
     r = tmp_app_with_users.post(
-        "/elastic-search/notify/all/test_access_restriction"
+        "/webhook/notify", json=request_json
     )
     assert r.status_code == 403  # Forbidden
 
-    r = tmp_app_with_users.delete(
-        "/elastic-search/notify/all/test_access_restriction"
-    )
-    assert r.status_code == 403  # Forbidden

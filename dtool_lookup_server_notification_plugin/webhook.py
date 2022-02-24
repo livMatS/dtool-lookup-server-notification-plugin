@@ -15,7 +15,15 @@ from flask_jwt_extended import (
 
 import dtoolcore
 
-from dtool_lookup_server import AuthenticationError
+from dtool_lookup_server import (
+    AuthenticationError,
+    mongo,
+    sql_db,
+    MONGO_COLLECTION
+)
+from dtool_lookup_server.sql_models import (
+    Dataset,
+)
 from dtool_lookup_server.utils import (
     generate_dataset_info,
     register_dataset,
@@ -25,8 +33,8 @@ from .config import Config
 from . import (
     delete_dataset,
     filter_ips,
+    _log_nested,
     _parse_obj_key,
-    _retrieve_uri
 )
 
 # event names from https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-event-types-and-destinations.html
@@ -96,6 +104,10 @@ OBJECT_REMOVED_EVENT_NAMES = [
 logger = logging.getLogger(__name__)
 
 
+def _reconstruct_uri(base_uri, object_key):
+    """Reconstruct dataset URI on S3 bucket from bucket name and object key."""
+    return '/'.join([base_uri, *object_key.split('/')[:-1]])
+
 def _process_object_created(base_uri, object_key):
     """Try to register new or update existing dataset entry if object created."""
 
@@ -103,8 +115,12 @@ def _process_object_created(base_uri, object_key):
     dataset_uri = None
 
     # We also need to update the database if the metadata has changed.
-    if kind in ['README.yml', 'tags', 'annotations']:
-        dataset_uri = _retrieve_uri(base_uri, uuid)
+    if kind in ['README.yml']:
+        # ignore ['tags', 'annotations'] for now
+
+        dataset_uri = _reconstruct_uri(base_uri, object_key)
+        # dataset_uri = _retrieve_uri(base_uri, uuid)
+        # I do not fully understand _retrieve_uri (jotelha)
 
     if dataset_uri is not None:
         try:
@@ -117,8 +133,12 @@ def _process_object_created(base_uri, object_key):
             # another notification once everything is final. We simply
             # ignore this.
             logger.debug('DtoolCoreTypeError raised for dataset '
-                         'with URI {dataset_uri}', dataset_uri=dataset_uri)
+                         'with URI %s', dataset_uri)
             pass
+    else:
+        logger.info(("Creation of '%s' within '%s' does not constitute the "
+                     "creation of a complete dataset or update of its metadata. "
+                     "Ignored."), object_key, base_uri)
 
     return {}
 
@@ -129,10 +149,24 @@ def _process_object_removed(base_uri, object_key):
     # into the respective UUID of the dataset.
 
     # only delete dataset from index if the `dtool` object is deleted
-    if object_key.endswith('/dtool'):
+
+    if object_key.endswith('/dtool'):  # somewhat dangerous if another item is named dtool
+        uri = _reconstruct_uri(base_uri, object_key)
         uuid, kind = _parse_obj_key(object_key)
         assert kind == 'dtool'
-        delete_dataset(base_uri, uuid)
+        # delete_dataset(base_uri, uuid)
+
+        logger.info('Deleting dataset with URI {}'.format(uri))
+
+        # Delete datasets with this URI
+        sql_db.session.query(Dataset) \
+            .filter(Dataset.uri == uri) \
+            .delete()
+        sql_db.session.commit()
+
+        # Remove from Mongo database
+        # https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html#pymongo.collection.Collection.delete_one
+        mongo.db[MONGO_COLLECTION].delete_one({"uri": {"$eq": uri}})
 
     return {}
 
@@ -156,29 +190,30 @@ def _process_event(event_name, event_data):
             abort(400)
 
         # object keys are %xx-escaped, bucket names as well?
-        logger.info("Received notification for raw bucket name '{bucket_name} and raw object key {object_key}",
-                    bucket_name=bucket_name, object_key=object_key)
+        logger.info("Received notification for raw bucket name '%s' and raw object key '%s'",
+                    bucket_name, object_key)
         bucket_name = urllib.parse.unquote(bucket_name, encoding='utf-8', errors='replace')
         object_key = urllib.parse.unquote(object_key, encoding='utf-8', errors='replace')
         logger.info(
-            "Received notification for de-escaped bucket name '{bucket_name} and de-escaped object key {object_key}",
-            bucket_name=bucket_name, object_key=object_key)
+            "Received notification for de-escaped bucket name '%s' and de-escaped object key '%s'",
+            bucket_name, object_key)
 
         # TODO: the same bucket name may exist at different locations wit different base URIS
         if bucket_name not in Config.BUCKET_TO_BASE_URI:
-            logger.error("No base URI configured for bucket '{bucket_name}'.",
-                         bucket_name=bucket_name)
+            logger.error("No base URI configured for bucket '%s'.", bucket_name)
             abort(400)
 
         base_uri = Config.BUCKET_TO_BASE_URI[bucket_name]
 
         if event_name in OBJECT_CREATED_EVENT_NAMES:
+            logger.info("Object '%s' created within '%s'", object_key, base_uri)
             response = _process_object_created(base_uri, object_key)
         elif event_name in OBJECT_REMOVED_EVENT_NAMES:
+            logger.info("Object '%s' removed from '%s'", object_key, base_uri)
             response = _process_object_removed(base_uri, object_key)
 
     else:
-        logger.info("Event '{event_name}' ignored.", event_name=event_name)
+        logger.info("Event '%s' ignored.", event_name)
 
     return response
 
@@ -188,7 +223,7 @@ webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 
 # wildcard route,
 # see https://flask.palletsprojects.com/en/2.0.x/patterns/singlepageapplications/
-@webhook_bp.route('/notify', defaults={'path': ''})
+@webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'])
 @webhook_bp.route('/notify/<path:path>', methods=['POST'])
 @filter_ips
 def notify(path):
@@ -196,22 +231,24 @@ def notify(path):
     dataset."""
 
     json = request.get_json()
+    logger.debug("Request JSON:")
+    _log_nested(logger.debug, json)
     if json is None:
         logger.error("No JSON attached.")
         abort(400)
 
-    records = getattr(json, 'Records', None)
-    if records is None:
-        logger.error("No 'Records' in JSON.")
-        abort(400)
+    logger.debug("Records:")
+    _log_nested(logger.debug, json['Records'])
 
-    event_name = getattr(records, 'eventName', None)
-    event_data = getattr(records, 's3', None)
-    if event_name is None:
+    try:
+        event_name = json['Records'][0]['eventName']
+    except KeyError:
         logger.error("No 'eventName' in 'Records''.")
         abort(400)
 
-    if event_data is None:
+    try:
+        event_data = json['Records'][0]['s3']
+    except KeyError:
         logger.error("No 's3' in 'Records'.")
         abort(400)
 

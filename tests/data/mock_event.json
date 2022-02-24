@@ -1,0 +1,53 @@
+{
+  "EventName": "s3:ObjectCreated:Put",
+  "Key": "test-bucket/dtool-49f0bf41-471b-4781-855e-161fe81ffb0d",
+  "Records": [
+    {
+      "eventVersion": "2.0",
+      "eventSource": "minio:s3",
+      "awsRegion": "",
+      "eventTime": "2022-02-23T16:13:27.619Z",
+      "eventName": "s3:ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "testuser_access_key"
+      },
+      "requestParameters": {
+        "principalId": "testuser_access_key",
+        "region": "",
+        "sourceIPAddress": "192.168.48.1"
+      },
+      "responseElements": {
+        "content-length": "0",
+        "x-amz-request-id": "16D67651CEE66595",
+        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "Config",
+        "bucket": {
+          "name": "test-bucket",
+          "ownerIdentity": {
+            "principalId": "testuser_access_key"
+          },
+          "arn": "arn:aws:s3:::test-bucket"
+        },
+        "object": {
+          "key": "dtool-49f0bf41-471b-4781-855e-161fe81ffb0d",
+          "size": 11,
+          "eTag": "5a1ecb9d0bcda01457c2c4782c444c5f",
+          "contentType": "binary/octet-stream",
+          "userMetadata": {
+            "content-type": "binary/octet-stream"
+          },
+          "sequencer": "16D67651D0E38940"
+        }
+      },
+      "source": {
+        "host": "192.168.48.1",
+        "port": "",
+        "userAgent": "Boto3/1.16.59 Python/3.8.10 Linux/5.13.0-30-generic Botocore/1.19.59 Resource"
+      }
+    }
+  ]
+}
