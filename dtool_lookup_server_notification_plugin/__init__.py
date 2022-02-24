@@ -4,6 +4,7 @@ from functools import wraps
 import dtoolcore
 from flask import (
     abort,
+    Blueprint,
     current_app,
     request
 )
@@ -26,6 +27,8 @@ from .config import Config
 
 AFFIRMATIVE_EXPRESSIONS = ['true', '1', 'y', 'yes', 'on']
 
+elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-search")
+webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 
 def filter_ips(f):
     @wraps(f)
