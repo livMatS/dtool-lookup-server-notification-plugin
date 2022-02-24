@@ -17,7 +17,6 @@ from flask_jwt_extended import (
 )
 
 from dtool_lookup_server.utils import (
-    base_uri_exists,
     generate_dataset_info,
     register_dataset,
 )

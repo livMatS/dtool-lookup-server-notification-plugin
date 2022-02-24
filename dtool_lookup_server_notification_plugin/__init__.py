@@ -50,23 +50,8 @@ def filter_ips(f):
     return wrapped
 
 
-def _parse_objpath(objpath):
-    """
-    Extract base URI and UUID from the URL. The URL has the form
-        https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
-    or
-        https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
-    The objpath is the last part of the URL that follows /notify/all/.
-    """
-    base_uri = None
-    objpath_without_bucket = None
-    for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
-        if objpath.startswith(bucket):
-            base_uri = uri
-            # +1 because there is an underscore after the bucket name
-            objpath_without_bucket = objpath[len(bucket)+1:]
-
-    components = objpath_without_bucket.split('/')
+def _parse_obj_key(key):
+    components = key.split('/')
     if len(components) > 1:
         if components[-2] in ['data', 'tags', 'annotations']:
             # The UUID is the component before 'data'
@@ -84,6 +69,26 @@ def _parse_objpath(objpath):
         else:
             kind = None
             uuid = None
+
+    return uuid, kind
+
+def _parse_objpath(objpath):
+    """
+    Extract base URI and UUID from the URL. The URL has the form
+        https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
+    or
+        https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
+    The objpath is the last part of the URL that follows /notify/all/.
+    """
+    base_uri = None
+    objpath_without_bucket = None
+    for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
+        if objpath.startswith(bucket):
+            base_uri = uri
+            # +1 because there is an underscore after the bucket name
+            objpath_without_bucket = objpath[len(bucket)+1:]
+
+    uuid, kind = _parse_obj_key(objpath_without_bucket)
 
     return base_uri, uuid, kind
 
