@@ -58,8 +58,9 @@ def _log_nested(log_func, dct):
 def filter_ips(f):
     @wraps(f)
     def wrapped(*args, **kwargs):
-        if ipaddress.ip_address(request.remote_addr) in \
-                Config.ALLOW_ACCESS_FROM:
+        ip = ipaddress.ip_address(request.remote_addr)
+        logger.info("Accessed from %s", ip)
+        if ip in Config.ALLOW_ACCESS_FROM:
             return f(*args, **kwargs)
         else:
             return abort(403)

@@ -225,7 +225,6 @@ webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 # see https://flask.palletsprojects.com/en/2.0.x/patterns/singlepageapplications/
 @webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'])
 @webhook_bp.route('/notify/<path:path>', methods=['POST'])
-@filter_ips
 def notify(path):
     """Notify the lookup server about creation, modification or deletion of a
     dataset."""
