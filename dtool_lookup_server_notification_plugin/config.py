@@ -2,16 +2,7 @@ import ipaddress
 import json
 import os
 
-try:
-    from importlib.metadata import version, PackageNotFoundError
-except ModuleNotFoundError:
-    from importlib_metadata import version, PackageNotFoundError
-
-try:
-    __version__ = version(__name__)
-except PackageNotFoundError:
-    # package is not installed
-    __version__  = None
+from . import __version__
 
 class Config(object):
     # Dictionary for conversion of bucket names to base URIs

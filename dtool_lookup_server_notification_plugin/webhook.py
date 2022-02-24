@@ -4,6 +4,7 @@ import urllib
 
 from flask import (
     abort,
+    Blueprint,
     jsonify,
     request
 )
@@ -24,7 +25,6 @@ from .config import Config
 from . import (
     delete_dataset,
     filter_ips,
-    webhook_bp,
     _parse_obj_key,
     _retrieve_uri
 )
@@ -181,6 +181,9 @@ def _process_event(event_name, event_data):
         logger.info("Event '{event_name}' ignored.", event_name=event_name)
 
     return response
+
+
+webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 
 
 # wildcard route,

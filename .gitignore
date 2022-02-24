@@ -19,3 +19,5 @@ dist/*
 venv/*
 old-provision/*
 jwt-spike/*
+
+dtool_lookup_server_notification_plugin/version.py

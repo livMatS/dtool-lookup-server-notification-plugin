@@ -6,6 +6,7 @@ import dtoolcore
 from dtool_lookup_server import AuthenticationError
 from flask import (
     abort,
+    Blueprint,
     current_app,
     jsonify,
     request
@@ -22,12 +23,14 @@ from dtool_lookup_server.utils import (
 
 from .config import Config
 from . import (
-    elastic_search_bp,
     delete_dataset,
     filter_ips,
     _parse_objpath,
     _retrieve_uri
 )
+
+
+elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-search")
 
 
 @elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])

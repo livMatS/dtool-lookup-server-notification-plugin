@@ -4,7 +4,6 @@ from functools import wraps
 import dtoolcore
 from flask import (
     abort,
-    Blueprint,
     current_app,
     request
 )
@@ -23,12 +22,28 @@ from dtool_lookup_server.utils import (
     base_uri_exists,
 )
 
+try:
+    from importlib.metadata import version, PackageNotFoundError
+except ModuleNotFoundError:
+    from importlib_metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version(__name__)
+except PackageNotFoundError:
+    # package is not installed
+    __version__  = None
+
+if __version__ is None:
+    try:
+        del __version__
+        from .version import __version__
+    except:
+        __version__ = None
+
+
 from .config import Config
 
 AFFIRMATIVE_EXPRESSIONS = ['true', '1', 'y', 'yes', 'on']
-
-elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-search")
-webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 
 def filter_ips(f):
     @wraps(f)
@@ -63,6 +78,7 @@ def _parse_obj_key(key):
             uuid = None
 
     return uuid, kind
+
 
 def _parse_objpath(objpath):
     """
@@ -119,7 +135,20 @@ def delete_dataset(base_uri, uuid):
     sql_db.session.commit()
 
     # Remove from Mongo database
-    mongo.db[MONGO_COLLECTION].remove({"uri": {"$eq": uri}})
+    # https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html#pymongo.collection.Collection.delete_one
+    mongo.db[MONGO_COLLECTION].delete_one({"uri": {"$eq": uri}})
 
 
+from dtool_lookup_server import AuthenticationError
+from flask_jwt_extended import jwt_required
+from flask import jsonify
 
+#@elastic_search_bp.route("/config", methods=["GET"])
+#@jwt_required()
+#def plugin_config():
+#    """Return the JSON-serialized elastic search plugin configuration."""
+#    try:
+#        config = Config.to_dict()
+#    except AuthenticationError:
+#        abort(401)
+#    return jsonify(config)
