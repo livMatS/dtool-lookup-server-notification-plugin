@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
-        mongodb-version: [4.0, 4.2]
+        python-version: [3.6, 3.8, 3.9]
+        mongodb-version: [4.4, 5.0]
         dtool-lookup-server-version: [0.17.2]
 
     steps:
@@ -33,10 +33,11 @@ jobs:
         pip install dtool-lookup-server==${{ matrix.dtool-lookup-server-version }}
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install .
-        # as of 2022/02/24, I had to pin the version
-        #  pip install markupsafe==2.0.1
-        # in local tests to avoid failure, keep this here as anote for now and 
-        # see what the workflow does remotely
+        # as of 2022/02/24, have to pin
+         pip install markupsafe==2.0.1
+        # in tests to avoid failure with
+        #   ImportError: cannot import name 'soft_unicode' from 'markupsafe'
+        # for Python >= 3.7 environments
         pip list
 
     - name: Lint with flake8
