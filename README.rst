@@ -115,6 +115,23 @@ will return the current notification plugin configuration with all keys in lower
 
 See ``dtool_lookup_server_dependency_graph_plugin.config.Config`` for more information.
 
+Testing
+-------
+
+Launch a minimal mongodb instance with
+
+.. code-block:: bash
+
+    $ cd tests/container && docker-compose up -d
+
+and run tests from within repository root using
+
+.. code-block:: bash
+
+    pytest --log-cli-level=DEBUG
+
+Refer to ``.github/workflows/test.yml`` for the recommended testing environment.
+
 Related repositories
 --------------------
 

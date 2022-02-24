@@ -33,6 +33,10 @@ jobs:
         pip install dtool-lookup-server==${{ matrix.dtool-lookup-server-version }}
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install .
+        # as of 2022/02/24, I had to pin the version
+        #  pip install markupsafe==2.0.1
+        # in local tests to avoid failure, keep this here as anote for now and 
+        # see what the workflow does remotely
         pip list
 
     - name: Lint with flake8

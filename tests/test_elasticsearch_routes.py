@@ -79,7 +79,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
 
     # Check README
     check_readme = get_readme_from_uri_by_user('snow-white', dest_uri)
-    assert check_readme == yaml.load(readme)
+    assert check_readme == yaml.safe_load(readme)
 
     # Update README
     new_readme = 'ghi: jkl'
@@ -102,7 +102,7 @@ def test_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
 
     # Check that README has actually been changed
     check_readme = get_readme_from_uri_by_user('snow-white', dest_uri)
-    assert check_readme == yaml.load(new_readme)
+    assert check_readme == yaml.safe_load(new_readme)
 
     # Tell plugin that dataset has been deleted
     r = tmp_app_with_users.delete(
