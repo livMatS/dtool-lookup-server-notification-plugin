@@ -1,23 +1,19 @@
 import ipaddress
 import json
-import os
+import logging
+import re
 from functools import wraps
 
-import dtoolcore
+import dtoolcore, dtool_s3
 from flask import (
     abort,
-    Blueprint,
     current_app,
-    jsonify,
     request
 )
-from flask_jwt_extended import (
-    jwt_required,
-)
+
 from dtool_lookup_server import (
     mongo,
     sql_db,
-    AuthenticationError,
     ValidationError,
     MONGO_COLLECTION,
 )
@@ -27,11 +23,7 @@ from dtool_lookup_server.sql_models import (
 )
 from dtool_lookup_server.utils import (
     base_uri_exists,
-    generate_dataset_info,
-    register_dataset,
 )
-
-AFFIRMATIVE_EXPRESSIONS = ['true', '1', 'y', 'yes', 'on']
 
 try:
     from importlib.metadata import version, PackageNotFoundError
@@ -42,41 +34,36 @@ try:
     __version__ = version(__name__)
 except PackageNotFoundError:
     # package is not installed
-    pass
+    __version__  = None
 
-elastic_search_bp = Blueprint("elastic-search", __name__, url_prefix="/elastic-search")
+if __version__ is None:
+    try:
+        del __version__
+        from .version import __version__
+    except:
+        __version__ = None
 
 
-class Config(object):
-    # Dictionary for conversion of bucket names to base URIs
-    BUCKET_TO_BASE_URI = json.loads(
-        os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_BUCKET_TO_BASE_URI',
-                       '{"bucket": "s3://bucket"}'))
+from .config import Config
 
-    # Limit notification access to IPs starting with this string
-    ALLOW_ACCESS_FROM = ipaddress.ip_network(
-        os.environ.get('DTOOL_LOOKUP_SERVER_NOTIFY_ALLOW_ACCESS_FROM',
-                       '0.0.0.0/0'))  # Default is access from any IP
+AFFIRMATIVE_EXPRESSIONS = ['true', '1', 'y', 'yes', 'on']
+UUID_REGEX_PATTERN = '[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}'
+UUID_REGEX = re.compile(UUID_REGEX_PATTERN, re.IGNORECASE)
 
-    @classmethod
-    def to_dict(cls):
-        """Convert server configuration into dict."""
-        d = {'version': __version__}
-        for k, v in cls.__dict__.items():
-            # select only capitalized fields
-            if k.upper() == k:
-                if isinstance(v, ipaddress.IPv4Network) or \
-                        isinstance(v, ipaddress.IPv6Network):
-                    v = str(v)
-                d[k.lower()] = v
-        return d
+logger = logging.getLogger(__name__)
+
+
+def _log_nested(log_func, dct):
+    for l in json.dumps(dct, indent=2, default=str).splitlines():
+        log_func(l)
 
 
 def filter_ips(f):
     @wraps(f)
     def wrapped(*args, **kwargs):
-        if ipaddress.ip_address(request.remote_addr) in \
-                Config.ALLOW_ACCESS_FROM:
+        ip = ipaddress.ip_address(request.remote_addr)
+        logger.info("Accessed from %s", ip)
+        if ip in Config.ALLOW_ACCESS_FROM:
             return f(*args, **kwargs)
         else:
             return abort(403)
@@ -84,23 +71,11 @@ def filter_ips(f):
     return wrapped
 
 
-def _parse_objpath(objpath):
-    """
-    Extract base URI and UUID from the URL. The URL has the form
-        https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
-    or
-        https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
-    The objpath is the last part of the URL that follows /notify/all/.
-    """
-    base_uri = None
-    objpath_without_bucket = None
-    for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
-        if objpath.startswith(bucket):
-            base_uri = uri
-            # +1 because there is an underscore after the bucket name
-            objpath_without_bucket = objpath[len(bucket)+1:]
-
-    components = objpath_without_bucket.split('/')
+def _parse_obj_key(key):
+    # Just looking at the end of the key is a bit risky, you might find
+    # anything below the data prefix, including another wrapped dataset, hence:
+    # TODO: check for relative position below top-level
+    components = key.split('/')
     if len(components) > 1:
         if components[-2] in ['data', 'tags', 'annotations']:
             # The UUID is the component before 'data'
@@ -119,7 +94,98 @@ def _parse_objpath(objpath):
             kind = None
             uuid = None
 
+    return uuid, kind
+
+
+def _parse_objpath(objpath):
+    """
+    Extract base URI and UUID from the URL. The URL has the form
+        https://<server-name>/elastic-search/notify/all/<bucket-name>_<uuid>/dtool
+    or
+        https://<server-name>/elastic-search/notify/all/<bucket-name>_<prefix><uuid>/dtool
+    The objpath is the last part of the URL that follows /notify/all/.
+    """
+    base_uri = None
+    objpath_without_bucket = None
+    for bucket, uri in Config.BUCKET_TO_BASE_URI.items():
+        if objpath.startswith(bucket):
+            base_uri = uri
+            # +1 because there is an underscore after the bucket name
+            objpath_without_bucket = objpath[len(bucket)+1:]
+
+    uuid, kind = _parse_obj_key(objpath_without_bucket)
+
     return base_uri, uuid, kind
+
+
+def _reconstruct_uri(base_uri, object_key):
+    """Reconstruct dataset URI on S3 bucket from bucket name and object key."""
+    # The expected structure of an object key (without preceding bucket name)
+    # is either
+    #   dtool-{UUID}
+    # for the top-level "link" object or
+    #   [{arbitrary_prefix}/]{UUID}[/{other_arbitrary_suffix}]
+    # There are now several to infer the URI of a dataset.
+    # The important key point is that all dtool-processible URIs
+    # point to the bucket top level, no matter whether the actual dataset
+    # resides at top-level as well or below some other prefix. This means
+    #   s3://test-bucket/49f0bf41-471b-4781-855e-161fe81ffb0d
+    # may point to a dataset actually residing at
+    #   s3://test-bucket/49f0bf41-471b-4781-855e-161fe81ffb0d
+    # or below some arbitrary prefix, i.e.
+    #   s3://test-bucket/u/test-user/49f0bf41-471b-4781-855e-161fe81ffb0d
+    # resolved by the content of the top-level "link" object
+    #   s3://test-bucket/dtool-49f0bf41-471b-4781-855e-161fe81ffb0d
+    # Seemingly, the straight forward approach would be to only evaluate
+    # top-level dtool-{UUID} objects and infer the URI as
+    #   s3://{BUCKET_NAME}/{UUID}
+    # As we must not make any assumptions on the order of object creation,
+    # a notification about a new dtool-{UUID} does not mean the availability
+    # of a healthy dataset fit for registration. Beyond that, updates to
+    # a dataset may not touch the dtool-{UUID} object. Instead, we try to infer
+    # the UUID of the containing dataset for every object notification, check
+    # whether a dataset has been registered already with the according
+    # combination of base URI and UUID, retrieve the correct dataset URI from
+    # the index in this case, or just construct it by concatenating base URI
+    # and UUID as
+    #   {BASE_URI}/{UUID}
+    # Note that the mapping (BASE_URI, UUID) <-> URI is only bijective
+    # for the s3 storage broker. It cannot be generalized to other storage.
+    # We need to find the dataset UUID in the obejct key. A viable approach
+    # is to just look for the first valid v4 UUID in the string. This would
+    # conflict with a prefix that contains a v4 UUID as well.
+
+    uuid_match = UUID_REGEX.search(object_key)
+    if uuid_match is None:
+        # This should not happen, all s3 objects created via dtool
+        # must have a valid UUID within its object key.
+        raise ValueError("The object key %s does not contain any valid UUID.", object_key)
+
+    uuid = uuid_match.group(0)
+    logger.debug("Extracted UUID '%s' from object key '%s'.", uuid, object_key)
+
+    # check whether this (BASE_URI, UUID) combination has been registered before
+    uri = _retrieve_uri(base_uri, uuid)
+
+    if uri is None:
+        # instead of using the dtoolcore._generate_uri proxy, we explicitly
+        # use the dtool_s3.storagebroker.S3StorageBroker.generate_uri class
+        # method as we know the name does not play a role here.
+        # uri = dtool_s3.storagebroker.S3StorageBroker.generate_uri(
+        #     name='dummy', uuid=uuid, base_uri=base_uri)
+        # instead of the explicit use of dtool_s3 above, we revert to the
+        # following
+        return dtoolcore._generate_uri({'uuid': uuid, 'name': uuid}, base_uri)
+        # just to make our current tests pass.
+        # TODO: kick out dtoolcore._generate_uri once we have proper S3-based tests
+
+        logger.debug(("Dataset has not been registered yet, "
+                      "reconstructed URI '%s' from base URI '%s' and UUID '%s'."),
+                     uri, base_uri, uuid)
+    else:
+        logger.debug("Dataset registered before under URI '%s'.", uri)
+
+    return uri
 
 
 def _retrieve_uri(base_uri, uuid):
@@ -137,60 +203,19 @@ def _retrieve_uri(base_uri, uuid):
         .filter(Dataset.uuid == uuid)  \
         .filter(BaseURI.id == Dataset.base_uri_id)  \
         .filter(BaseURI.base_uri == base_uri)
+    logger.debug("Query result:")
+    _log_nested(logger.debug, query_result)
+
     for dataset, base_uri in query_result:
+        # this general treatment makes sense for arbitrary storage brokers, but
+        # for the current (2022-02) implementation of the s3 broker, the actual
+        # dataset name is irrelevant for the URI. Furthermore. there should
+        # always be only one entry for a particular (BASE_URI, UUID) tuple
+        # on an s3 bucket.
         return dtoolcore._generate_uri(
             {'uuid': dataset.uuid, 'name': dataset.name}, base_uri.base_uri)
 
     return None
-
-
-@elastic_search_bp.route("/notify/all/<path:objpath>", methods=["POST"])
-@filter_ips
-def notify_create_or_update(objpath):
-    """Notify the lookup server about creation of a new object or modification
-    of an object's metadata."""
-    json = request.get_json()
-    if json is None:
-        abort(400)
-
-    dataset_uri = None
-
-    # The metadata is only attached to the 'dtool' object of the respective
-    # UUID and finalizes creation of a dataset. We can register that dataset
-    # now.
-    if 'metadata' in json:
-        admin_metadata = json['metadata']
-
-        if 'name' in admin_metadata and 'uuid' in admin_metadata:
-            bucket = json['bucket']
-
-            base_uri = Config.BUCKET_TO_BASE_URI[bucket]
-
-            dataset_uri = dtoolcore._generate_uri(admin_metadata, base_uri)
-
-            current_app.logger.info('Registering dataset with URI {}'
-                                    .format(dataset_uri))
-    else:
-        base_uri, uuid, kind = _parse_objpath(objpath)
-        # We also need to update the database if the metadata has changed.
-        if kind in ['README.yml', 'tags', 'annotations']:
-            dataset_uri = _retrieve_uri(base_uri, uuid)
-
-    if dataset_uri is not None:
-        try:
-            dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-            dataset_info = generate_dataset_info(dataset, base_uri)
-            register_dataset(dataset_info)
-        except dtoolcore.DtoolCoreTypeError:
-            # DtoolCoreTypeError is raised if this is not a dataset yet, i.e.
-            # if the dataset has only partially been copied. There will be
-            # another notification once everything is final. We simply
-            # ignore this.
-            current_app.logger.debug('DtoolCoreTypeError raised for dataset '
-                                     'with URI {}'.format(dataset_uri))
-            pass
-
-    return jsonify({})
 
 
 def delete_dataset(base_uri, uuid):
@@ -205,38 +230,5 @@ def delete_dataset(base_uri, uuid):
     sql_db.session.commit()
 
     # Remove from Mongo database
-    mongo.db[MONGO_COLLECTION].remove({"uri": {"$eq": uri}})
-
-
-@elastic_search_bp.route("/notify/all/<path:objpath>", methods=["DELETE"])
-@filter_ips
-def notify_delete(objpath):
-    """Notify the lookup server about deletion of an object."""
-    # The only information that we get is the URL. We need to convert the URL
-    # into the respective UUID of the dataset.
-    url = request.url
-
-    # Delete dataset if the `dtool` object is deleted
-    if url.endswith('/dtool'):
-        base_uri, uuid, kind = _parse_objpath(objpath)
-        assert kind == 'dtool'
-        delete_dataset(base_uri, uuid)
-
-    return jsonify({})
-
-
-@elastic_search_bp.route("/_cluster/health", methods=["GET"])
-def health():
-    """This route is used by the S3 storage to test whether the URI exists."""
-    return jsonify({})
-
-
-@elastic_search_bp.route("/config", methods=["GET"])
-@jwt_required()
-def plugin_config():
-    """Return the JSON-serialized elastic search plugin configuration."""
-    try:
-        config = Config.to_dict()
-    except AuthenticationError:
-        abort(401)
-    return jsonify(config)
+    # https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html#pymongo.collection.Collection.delete_one
+    mongo.db[MONGO_COLLECTION].delete_one({"uri": {"$eq": uri}})

@@ -1,0 +1,1278 @@
+INFO:werkzeug: * Running on http://0.0.0.0:5500/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with inotify reloader
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-604-223
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.557570 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.560715 ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.562953 ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.565446 ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.564310 ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=16>",
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.566506 ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.568931 ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.571984 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.572420 ###
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.572584 ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.572932 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.573234 ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.574131 ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:### 2022-02-23 17:16:19.574835 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf0038ed30>",
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=17>",
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=22>",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=18>",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=21>",
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=19>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=26>",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=20>",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=29>",
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=25>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59984,
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=23>",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=28>",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=24>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf003aa280>",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf003aa040>",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf003aaaf0>",
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf003561f0>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=27>",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf003aa820>",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf0036c3a0>",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf003aae50>",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf0036cb80>",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf00356d30>",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf00356700>",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf0036c1f0>",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf00356a60>",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "978",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7fcf0036c700>",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59988,
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59998,
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "POST",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59996,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59990,
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59992,
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60008,
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:    "REMOTE_PORT": 59994,
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60014,
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60000,
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60004,
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60006,
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "978",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60012,
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1022",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1006",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60010,
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1016",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1016",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1088",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:  "Key": "test-bucket/dtool-31e75284-3532-4907-a5c5-399f2db74edd",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1088",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1024",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1024",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1016",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1016",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1022",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "Go-http-client/1.1",
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "1006",
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:    "CONTENT_TYPE": "application/json",
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.555Z",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [POST]>"
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "Key": "test-bucket/dtool-49f0bf41-471b-4781-855e-161fe81ffb0d",
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/31e75284-3532-4907-a5c5-399f2db74edd/manifest.json",
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/31e75284-3532-4907-a5c5-399f2db74edd/dtool",
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/31e75284-3532-4907-a5c5-399f2db74edd/README.txt",
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/31e75284-3532-4907-a5c5-399f2db74edd/README.yml",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/49f0bf41-471b-4781-855e-161fe81ffb0d/data/a010ac3220426ba6ceb4a5a56bf7f5a908e078c8",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/31e75284-3532-4907-a5c5-399f2db74edd/data/4d4612b76e5bff8c97577257a63cf9bfa8829f43",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/49f0bf41-471b-4781-855e-161fe81ffb0d/structure.json",
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/31e75284-3532-4907-a5c5-399f2db74edd/structure.json",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/49f0bf41-471b-4781-855e-161fe81ffb0d/README.txt",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/49f0bf41-471b-4781-855e-161fe81ffb0d/README.yml",
+INFO:logging_middleware.hello:### JSON ###
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.556Z",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/49f0bf41-471b-4781-855e-161fe81ffb0d/manifest.json",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.557Z",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.557Z",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:  "EventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:  "Key": "test-bucket/u/testuser/49f0bf41-471b-4781-855e-161fe81ffb0d/dtool",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.556Z",
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:  "Records": [
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.556Z",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.558Z",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.556Z",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.559Z",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.557Z",
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.557Z",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:    {
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.558Z",
+INFO:logging_middleware.hello:      "eventVersion": "2.0",
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.559Z",
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "eventSource": "minio:s3",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      "awsRegion": "",
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "eventTime": "2022-02-23T16:16:19.558Z",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "eventName": "s3:ObjectRemoved:Delete",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:      "userIdentity": {
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:        "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:      "requestParameters": {
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "principalId": "minioadmin",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "region": "",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "sourceIPAddress": "192.168.48.1"
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:          "key": "dtool-31e75284-3532-4907-a5c5-399f2db74edd",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      "responseElements": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:          "sequencer": "16D67679D919EEB4"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:        "content-length": "116",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "x-amz-request-id": "16D67679D8F0604F",
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "x-minio-deployment-id": "b91f53d2-6961-4a15-ae5b-c400ec15dcee",
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "x-minio-origin-endpoint": "http://192.168.48.8:9000"
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:      "s3": {
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:        "s3SchemaVersion": "1.0",
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:        "configurationId": "Config",
+INFO:logging_middleware.hello:          "key": "dtool-49f0bf41-471b-4781-855e-161fe81ffb0d",
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:        "bucket": {
+INFO:logging_middleware.hello:          "sequencer": "16D67679D91D1C32"
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F31e75284-3532-4907-a5c5-399f2db74edd%2Fmanifest.json",
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F31e75284-3532-4907-a5c5-399f2db74edd%2Fdtool",
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:          "name": "test-bucket",
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          "sequencer": "16D67679D92D62CB"
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          "sequencer": "16D67679D929C46F"
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:          "ownerIdentity": {
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F31e75284-3532-4907-a5c5-399f2db74edd%2FREADME.txt",
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:            "principalId": "minioadmin"
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F31e75284-3532-4907-a5c5-399f2db74edd%2FREADME.yml",
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F49f0bf41-471b-4781-855e-161fe81ffb0d%2Fdata%2Fa010ac3220426ba6ceb4a5a56bf7f5a908e078c8",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:          "sequencer": "16D67679D91F4648"
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F31e75284-3532-4907-a5c5-399f2db74edd%2Fdata%2F4d4612b76e5bff8c97577257a63cf9bfa8829f43",
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F49f0bf41-471b-4781-855e-161fe81ffb0d%2Fstructure.json",
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F31e75284-3532-4907-a5c5-399f2db74edd%2Fstructure.json",
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F49f0bf41-471b-4781-855e-161fe81ffb0d%2FREADME.txt",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:          },
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:          "sequencer": "16D67679D922AE94"
+INFO:logging_middleware.hello:          "sequencer": "16D67679D93FEC44"
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:          "sequencer": "16D67679D925A48A"
+INFO:logging_middleware.hello:          "sequencer": "16D67679D94C29AE"
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:          "sequencer": "16D67679D9328608"
+INFO:logging_middleware.hello:          "sequencer": "16D67679D9370AF3"
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F49f0bf41-471b-4781-855e-161fe81ffb0d%2FREADME.yml",
+INFO:logging_middleware.hello:          "arn": "arn:aws:s3:::test-bucket"
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F49f0bf41-471b-4781-855e-161fe81ffb0d%2Fmanifest.json",
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:          "sequencer": "16D67679D93C2F07"
+INFO:logging_middleware.hello:        },
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:          "sequencer": "16D67679D9485068"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:        "object": {
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:          "key": "u%2Ftestuser%2F49f0bf41-471b-4781-855e-161fe81ffb0d%2Fdtool",
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:          "sequencer": "16D67679D943C68A"
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:      "source": {
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:        }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:      },
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:      "source": {
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:        "host": "192.168.48.1",
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:  ]
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:      }
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:  ]
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:        "port": "",
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:        "userAgent": "MinIO (linux; amd64) minio-go/v7.0.13 mc/RELEASE.2021-09-02T09-21-27Z"
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:  ]
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:      }
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:}
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:    }
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:  ]
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 17:16:19] "[37mPOST /elastic-search/notify/all HTTP/1.1[0m" 200 -

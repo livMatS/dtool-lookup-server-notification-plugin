@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
-        mongodb-version: [4.0, 4.2]
+        python-version: [3.6, 3.8, 3.9]
+        mongodb-version: [4.4, 5.0]
         dtool-lookup-server-version: [0.17.2]
 
     steps:
@@ -33,6 +33,11 @@ jobs:
         pip install dtool-lookup-server==${{ matrix.dtool-lookup-server-version }}
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install .
+        # as of 2022/02/24, have to pin
+         pip install markupsafe==2.0.1
+        # in tests to avoid failure with
+        #   ImportError: cannot import name 'soft_unicode' from 'markupsafe'
+        # for Python >= 3.7 environments
         pip list
 
     - name: Lint with flake8
@@ -41,6 +46,7 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
     - name: Test with pytest
       run: |
-        pytest
+        pytest --log-cli-level=DEBUG

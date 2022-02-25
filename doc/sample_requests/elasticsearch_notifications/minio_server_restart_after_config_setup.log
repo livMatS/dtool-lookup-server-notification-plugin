@@ -1,0 +1,218 @@
+ * Serving Flask app "logging_middleware.hello" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+INFO:werkzeug: * Running on http://0.0.0.0:5500/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with inotify reloader
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 283-604-223
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 18:11:00.992124 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/ ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=15>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7f2380368f70>",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "GET",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60046,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "go-elasticsearch/7.12.0 (linux amd64; Go 1.17.6)",
+INFO:logging_middleware.hello:    "HTTP_X_ELASTIC_CLIENT_META": "es=7.12.0,go=1.17.6,t=7.12.0,hc=1.17.6",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/' [GET]>"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "path": "elastic-search/"
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 18:11:00] "GET /elastic-search/ HTTP/1.1" 200 -
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 18:11:00.994270 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/_resolve/index/notify/all ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=15>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7f2380368e50>",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "GET",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/_resolve/index/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/_resolve/index/notify/all",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/_resolve/index/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60048,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "go-elasticsearch/7.12.0 (linux amd64; Go 1.17.6)",
+INFO:logging_middleware.hello:    "HTTP_X_ELASTIC_CLIENT_META": "es=7.12.0,go=1.17.6,t=7.12.0,hc=1.17.6",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/_resolve/index/notify/all' [GET]>"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "path": "elastic-search/_resolve/index/notify/all"
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 18:11:00] "GET /elastic-search/_resolve/index/notify/all HTTP/1.1" 200 -
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 18:11:00.996228 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/notify/all ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=15>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7f23805c7700>",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "PUT",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/notify/all",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60050,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "go-elasticsearch/7.12.0 (linux amd64; Go 1.17.6)",
+INFO:logging_middleware.hello:    "CONTENT_LENGTH": "0",
+INFO:logging_middleware.hello:    "HTTP_X_ELASTIC_CLIENT_META": "es=7.12.0,go=1.17.6,t=7.12.0,hc=1.17.6",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/notify/all' [PUT]>"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "path": "elastic-search/notify/all"
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 18:11:00] "PUT /elastic-search/notify/all HTTP/1.1" 200 -
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 18:11:01.108524 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/ ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=15>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7f23805c71f0>",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "HEAD",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60052,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "go-elasticsearch/7.12.0 (linux amd64; Go 1.17.6)",
+INFO:logging_middleware.hello:    "HTTP_X_ELASTIC_CLIENT_META": "es=7.12.0,go=1.17.6,t=7.12.0,hc=1.17.6",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/' [HEAD]>"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "path": "elastic-search/"
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 18:11:01] "HEAD /elastic-search/ HTTP/1.1" 200 -
+INFO:logging_middleware.hello:================================================================================
+INFO:logging_middleware.hello:### 2022-02-23 18:11:02.734158 ###
+INFO:logging_middleware.hello:### PATH: elastic-search/ ###
+INFO:logging_middleware.hello:### REQUEST ###
+INFO:logging_middleware.hello:{
+INFO:logging_middleware.hello:  "environ": {
+INFO:logging_middleware.hello:    "wsgi.version": [
+INFO:logging_middleware.hello:      1,
+INFO:logging_middleware.hello:      0
+INFO:logging_middleware.hello:    ],
+INFO:logging_middleware.hello:    "wsgi.url_scheme": "http",
+INFO:logging_middleware.hello:    "wsgi.input": "<_io.BufferedReader name=15>",
+INFO:logging_middleware.hello:    "wsgi.errors": "<_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>",
+INFO:logging_middleware.hello:    "wsgi.multithread": true,
+INFO:logging_middleware.hello:    "wsgi.multiprocess": false,
+INFO:logging_middleware.hello:    "wsgi.run_once": false,
+INFO:logging_middleware.hello:    "werkzeug.server.shutdown": "<function WSGIRequestHandler.make_environ.<locals>.shutdown_server at 0x7f23805c75e0>",
+INFO:logging_middleware.hello:    "SERVER_SOFTWARE": "Werkzeug/1.0.1",
+INFO:logging_middleware.hello:    "REQUEST_METHOD": "HEAD",
+INFO:logging_middleware.hello:    "SCRIPT_NAME": "",
+INFO:logging_middleware.hello:    "PATH_INFO": "/elastic-search/",
+INFO:logging_middleware.hello:    "QUERY_STRING": "",
+INFO:logging_middleware.hello:    "REQUEST_URI": "/elastic-search/",
+INFO:logging_middleware.hello:    "RAW_URI": "/elastic-search/",
+INFO:logging_middleware.hello:    "REMOTE_ADDR": "192.168.48.8",
+INFO:logging_middleware.hello:    "REMOTE_PORT": 60054,
+INFO:logging_middleware.hello:    "SERVER_NAME": "0.0.0.0",
+INFO:logging_middleware.hello:    "SERVER_PORT": "5500",
+INFO:logging_middleware.hello:    "SERVER_PROTOCOL": "HTTP/1.1",
+INFO:logging_middleware.hello:    "HTTP_HOST": "host.docker.internal:5500",
+INFO:logging_middleware.hello:    "HTTP_USER_AGENT": "go-elasticsearch/7.12.0 (linux amd64; Go 1.17.6)",
+INFO:logging_middleware.hello:    "HTTP_X_ELASTIC_CLIENT_META": "es=7.12.0,go=1.17.6,t=7.12.0,hc=1.17.6",
+INFO:logging_middleware.hello:    "werkzeug.request": "<Request 'http://host.docker.internal:5500/elastic-search/' [HEAD]>"
+INFO:logging_middleware.hello:  },
+INFO:logging_middleware.hello:  "shallow": false,
+INFO:logging_middleware.hello:  "url_rule": "/<path:path>",
+INFO:logging_middleware.hello:  "view_args": {
+INFO:logging_middleware.hello:    "path": "elastic-search/"
+INFO:logging_middleware.hello:  }
+INFO:logging_middleware.hello:}
+INFO:logging_middleware.hello:================================================================================
+INFO:werkzeug:192.168.48.8 - - [23/Feb/2022 18:11:02] "HEAD /elastic-search/ HTTP/1.1" 200 -
