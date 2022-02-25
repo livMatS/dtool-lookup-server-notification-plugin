@@ -1,13 +1,16 @@
-import logging
+import ipaddress
 import json
+import logging
+import os
 import random
 import shutil
 import string
-import tempfile
-import os
 import sys
+import tempfile
 
 import pytest
+
+import dtoolcore
 
 # Pytest does not add the working directory to the path so we do it here.
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -244,3 +247,25 @@ def request_json(request):
         request_json = json.load(f)
 
     return request_json
+
+
+@pytest.fixture
+def immuttable_dataset_uri(request):
+    fpath = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'data', '1a1f9fad-8589-413e-9602-5bbd66bfe675')
+    uri = dtoolcore.utils.sanitise_uri(fpath)
+
+    return uri
+
+
+@pytest.fixture
+def access_restriction(request):
+    from dtool_lookup_server_notification_plugin.config import Config
+
+    backup = Config.ALLOW_ACCESS_FROM
+    Config.ALLOW_ACCESS_FROM = ipaddress.ip_network("1.2.3.4")
+
+    @request.addfinalizer
+    def teardown():
+        Config.ALLOW_ACCESS_FROM = backup

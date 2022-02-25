@@ -2,8 +2,10 @@
 import ipaddress
 import json
 import os
+import shutil
 import urllib.parse
 
+import dtoolcore
 import yaml
 
 from dtoolcore import ProtoDataSet, generate_admin_metadata
@@ -20,6 +22,8 @@ from dtool_lookup_server.utils import (
 from dtool_lookup_server_notification_plugin import Config
 
 from . import (
+    access_restriction,
+    immuttable_dataset_uri,
     tmp_app_with_users,
     tmp_dir_fixture,
     request_json,
@@ -27,7 +31,8 @@ from . import (
 ) # NOQA
 
 
-def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json):  # NOQA
+def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture,
+                              request_json, immuttable_dataset_uri):  # NOQA
     bucket_name = 'bucket'
 
     # Add local directory as base URI and assign URI to the bucket
@@ -40,41 +45,28 @@ def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json)
     })
     Config.BUCKET_TO_BASE_URI[bucket_name] = base_uri
 
-    # Create test dataset
-    name = "my_dataset"
-    admin_metadata = generate_admin_metadata(name)
-    dest_uri = DiskStorageBroker.generate_uri(
-        name=name,
-        uuid=admin_metadata["uuid"],
-        base_uri=tmp_dir_fixture)
-
-    sample_data_path = os.path.join(TEST_SAMPLE_DATA)
-    local_file_path = os.path.join(sample_data_path, 'tiny.png')
-
-    # Create a minimal dataset
-    proto_dataset = ProtoDataSet(
-        uri=dest_uri,
-        admin_metadata=admin_metadata,
-        config_path=None)
-    proto_dataset.create()
-    readme = 'abc: def'
-    proto_dataset.put_readme(readme)
-    proto_dataset.put_item(local_file_path, 'tiny.png')
-
-    proto_dataset.freeze()
-
     # Read in a dataset
-    dataset = DataSet.from_uri(dest_uri)
+    dataset = DataSet.from_uri(immuttable_dataset_uri)
+    uuid = dataset.uuid
+    name = dataset.name
 
-    expected_identifier = generate_identifier('tiny.png')
+    expected_identifier = generate_identifier('simple_text_file.txt')
     assert expected_identifier in dataset.identifiers
     assert len(dataset.identifiers) == 1
+
+    # dataset acrobatics, need to get rid of all that
+    dtoolcore.copy(immuttable_dataset_uri, tmp_dir_fixture)
+
+    dest_uri = sanitise_uri('/'.join((tmp_dir_fixture, name)))
+    dataset = DataSet.from_uri(dest_uri)
+    readme = 'abc: def'
+    dataset.put_readme(readme)
 
     # modify mock event to match our temporary dataset
     request_json['Records'][0]['eventName'] = 's3:ObjectCreated:Put'
     request_json['Records'][0]['s3']['bucket']['name'] = bucket_name
     # notification plugin will try to register dataset when README.yml created or changed
-    request_json['Records'][0]['s3']['object']['key'] = urllib.parse.quote('my_dataset/README.yml')
+    request_json['Records'][0]['s3']['object']['key'] = urllib.parse.quote(f'{uuid}/README.yml')
 
     # Tell plugin that dataset has been created
     r = tmp_app_with_users.post("/webhook/notify", json=request_json)
@@ -85,7 +77,7 @@ def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json)
     assert len(datasets) == 1
     assert datasets[0]['base_uri'] == base_uri
     assert datasets[0]['uri'] == dest_uri
-    assert datasets[0]['uuid'] == admin_metadata['uuid']
+    assert datasets[0]['uuid'] == uuid # admin_metadata['uuid']
     assert datasets[0]['name'] == name
 
     # Check README
@@ -105,7 +97,7 @@ def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json)
     assert len(datasets) == 1
     assert datasets[0]['base_uri'] == base_uri
     assert datasets[0]['uri'] == dest_uri
-    assert datasets[0]['uuid'] == admin_metadata['uuid']
+    assert datasets[0]['uuid'] == uuid
     assert datasets[0]['name'] == name
 
     # Check that README has actually been changed
@@ -115,7 +107,7 @@ def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json)
     # notification plugin will try to remove dataset from index
     # # when the dtool object is deleted
     request_json['Records'][0]['eventName'] = 's3:ObjectRemoved:Delete'
-    request_json['Records'][0]['s3']['object']['key'] = urllib.parse.quote('my_dataset/dtool')
+    request_json['Records'][0]['s3']['object']['key'] = urllib.parse.quote(f'{uuid}/dtool')
     r = tmp_app_with_users.post("/webhook/notify", json=request_json)
     assert r.status_code == 200
 
@@ -124,12 +116,9 @@ def test_webhook_notify_route(tmp_app_with_users, tmp_dir_fixture, request_json)
     assert len(datasets) == 0
 
 
-def test_access_restriction(tmp_app_with_users, request_json):
+def test_webhook_access_restriction(tmp_app_with_users, request_json, access_restriction):
     # Remote address in test is 127.0.0.1
-    Config.ALLOW_ACCESS_FROM = ipaddress.ip_network("1.2.3.4")
-
     r = tmp_app_with_users.post(
         "/webhook/notify", json=request_json
     )
     assert r.status_code == 403  # Forbidden
-

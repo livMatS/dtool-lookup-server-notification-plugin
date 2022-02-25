@@ -1,5 +1,4 @@
 """Test the /elastic-search/notify/* blueprint routes."""
-import ipaddress
 import os
 import yaml
 
@@ -16,7 +15,12 @@ from dtool_lookup_server.utils import (
 )
 from dtool_lookup_server_notification_plugin import Config
 
-from . import tmp_app_with_users, tmp_dir_fixture, TEST_SAMPLE_DATA  # NOQA
+from . import (
+    access_restriction,
+    tmp_app_with_users,
+    tmp_dir_fixture,
+    TEST_SAMPLE_DATA
+) # NOQA
 
 def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQA
     bucket_name = 'bucket'
@@ -114,10 +118,8 @@ def test_elasticsearch_notify_route(tmp_app_with_users, tmp_dir_fixture):  # NOQ
     assert len(datasets) == 0
 
 
-def test_elasticsearch_access_restriction(tmp_app_with_users):
+def test_elasticsearch_access_restriction(tmp_app_with_users, access_restriction):
     # Remote address in test is 127.0.0.1
-    Config.ALLOW_ACCESS_FROM = ipaddress.ip_network("1.2.3.4")
-
     r = tmp_app_with_users.post(
         "/elastic-search/notify/all/test_access_restriction"
     )
