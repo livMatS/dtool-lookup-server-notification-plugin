@@ -31,10 +31,10 @@ from dtool_lookup_server.utils import (
 
 from .config import Config
 from . import (
-    delete_dataset,
     filter_ips,
     _log_nested,
     _parse_obj_key,
+    _reconstruct_uri
 )
 
 # event names from https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-event-types-and-destinations.html
@@ -104,10 +104,6 @@ OBJECT_REMOVED_EVENT_NAMES = [
 logger = logging.getLogger(__name__)
 
 
-def _reconstruct_uri(base_uri, object_key):
-    """Reconstruct dataset URI on S3 bucket from bucket name and object key."""
-    return '/'.join([base_uri, *object_key.split('/')[:-1]])
-
 def _process_object_created(base_uri, object_key):
     """Try to register new or update existing dataset entry if object created."""
 
@@ -119,8 +115,6 @@ def _process_object_created(base_uri, object_key):
         # ignore ['tags', 'annotations'] for now
 
         dataset_uri = _reconstruct_uri(base_uri, object_key)
-        # dataset_uri = _retrieve_uri(base_uri, uuid)
-        # I do not fully understand _retrieve_uri (jotelha)
 
     if dataset_uri is not None:
         try:
@@ -154,7 +148,6 @@ def _process_object_removed(base_uri, object_key):
         uri = _reconstruct_uri(base_uri, object_key)
         uuid, kind = _parse_obj_key(object_key)
         assert kind == 'dtool'
-        # delete_dataset(base_uri, uuid)
 
         logger.info('Deleting dataset with URI {}'.format(uri))
 
@@ -225,6 +218,7 @@ webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 # see https://flask.palletsprojects.com/en/2.0.x/patterns/singlepageapplications/
 @webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'])
 @webhook_bp.route('/notify/<path:path>', methods=['POST'])
+@filter_ips
 def notify(path):
     """Notify the lookup server about creation, modification or deletion of a
     dataset."""
