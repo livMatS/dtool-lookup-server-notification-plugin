@@ -43,14 +43,19 @@ OBJECT_CREATED_EVENT_NAMES = [
     's3:ObjectCreated:Put',
     's3:ObjectCreated:Post',
     's3:ObjectCreated:Copy',
-    's3:ObjectCreated:CompleteMultipartUpload'
+    's3:ObjectCreated:CompleteMultipartUpload',
+    'ObjectCreated:Put',  # NetApp Storage GRID via SNS endpoint uses event names without s3 prefix
+    'ObjectCreated:Post',
+    'ObjectCreated:Copy',
+    'ObjectCreated:CompleteMultipartUpload'
 ]
 
 
 OBJECT_REMOVED_EVENT_NAMES = [
-    's3:ObjectRemoved:*',
     's3:ObjectRemoved:Delete',
-    's3:ObjectRemoved:DeleteMarkerCreated'
+    's3:ObjectRemoved:DeleteMarkerCreated',
+    'ObjectRemoved:Delete',  # NetApp Storage GRID via SNS endpoint uses event names without s3 prefix
+    'ObjectRemoved:DeleteMarkerCreated'
 ]
 
 # expected event structure from
