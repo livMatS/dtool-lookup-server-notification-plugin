@@ -1,4 +1,5 @@
 """Receive and process Amazon S3 event notifications."""
+import json
 import logging
 import urllib
 
@@ -99,7 +100,57 @@ OBJECT_REMOVED_EVENT_NAMES = [
 #       }
 #    ]
 # }
-
+#
+# if NetApp storage grid is configured for an SNS endpoint, it does not
+# directly submit content of type 'application/json', but instead
+# 'application/x-www-form-urlencoded'. request.form has the structure
+# {
+#   "server": [
+#   "Action": "Publish",
+#   "Message": "{...}",
+#   "TopicArn": "urn:test:sns:test:test:test",
+#     "0.0.0.0",
+#   "Version": "2010-03-31"
+# }
+#
+# and includes an S3 event notification of above standard within 'Message'
+#
+# {
+#   "Records": [
+#     {
+#       "eventVersion": "2.0",
+#       "eventSource": "sgws:s3",
+#       "eventTime": "2022-03-09T12:30:21Z",
+#       "eventName": "ObjectCreated:Put",
+#       "userIdentity": {
+#         "principalId": "80888526281258163395"
+#       },
+#       "requestParameters": {
+#         "sourceIPAddress": "132.230.239.200"
+#       },
+#       "responseElements": {
+#         "x-amz-request-id": "1646829021003401"
+#       },
+#       "s3": {
+#         "s3SchemaVersion": "1.0",
+#         "configurationId": "Object created test",
+#         "bucket": {
+#           "name": "frct-livmats",
+#           "ownerIdentity": {
+#             "principalId": "80888526281258163395"
+#           },
+#           "arn": "urn:sgws:s3:::frct-livmats"
+#         },
+#         "object": {
+#           "key": "u/jh1130/481b1bc4-f867-4580-b5d3-28fd7e64a107/dtool",
+#           "size": 233,
+#           "eTag": "e999ae313285a5313c3fcf4ff13bd3ca",
+#           "sequencer": "16DAB6450E18CA14"
+#         }
+#       }
+#     }
+#   ]
+# }
 
 logger = logging.getLogger(__name__)
 
@@ -216,31 +267,52 @@ webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 
 # wildcard route,
 # see https://flask.palletsprojects.com/en/2.0.x/patterns/singlepageapplications/
-@webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'])
+# strict_slashes=False matches '/notify' and '/notify/'
+@webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'], strict_slashes=False)
 @webhook_bp.route('/notify/<path:path>', methods=['POST'])
 @filter_ips
 def notify(path):
     """Notify the lookup server about creation, modification or deletion of a
     dataset."""
 
-    json = request.get_json()
+    json_content = None
+
+    # special treatment for form data as submitted by NetApp Storage GRID
+    if request.content_type.startswith('application/x-www-form-urlencoded'):
+        logger.debug("Received 'application/x-www-form-urlencoded' content.")
+        form = request.form
+        logger.debug("Form:")
+        _log_nested(logger.debug, form)
+        if 'Message' in form:
+            logger.debug("Try to parse 'Message' field of form as JSON.")
+            try:
+                json_content = json.loads(form['Message'])
+                logger.debug("Succeeded to parse 'Message' field of form as JSON.")
+            except:
+                logger.warning("Failed to parse 'Message' field of form '%s' as JSON.", form['Message'])
+    else: # general treatment, usually for 'application/json'
+        json_content = request.get_json()
+
     logger.debug("Request JSON:")
-    _log_nested(logger.debug, json)
-    if json is None:
+    _log_nested(logger.debug, json_content)
+    if json_content is None:
         logger.error("No JSON attached.")
-        abort(400)
+        # health check: NetApp Storage GRID performs a health check post request,
+        # but attaches content of type 'application/x-www-form-urlencoded', i.e.
+        #  Action=Publish&Message=StorageGRID+Test+Message&TopicArn=urn%3Atest%3Asns%3Atest%3Atest%3Atest&Version=2010-03-31
+        return {}
 
     logger.debug("Records:")
-    _log_nested(logger.debug, json['Records'])
+    _log_nested(logger.debug, json_content['Records'])
 
     try:
-        event_name = json['Records'][0]['eventName']
+        event_name = json_content['Records'][0]['eventName']
     except KeyError:
         logger.error("No 'eventName' in 'Records''.")
         abort(400)
 
     try:
-        event_data = json['Records'][0]['s3']
+        event_data = json_content['Records'][0]['s3']
     except KeyError:
         logger.error("No 's3' in 'Records'.")
         abort(400)
