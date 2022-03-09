@@ -164,13 +164,13 @@ def _process_object_created(base_uri, object_key):
     """Try to register new or update existing dataset entry if object created."""
 
     uuid, kind = _parse_obj_key(object_key)
-    dataset_uri = None
 
     # We also need to update the database if the metadata has changed.
-    if kind in ['README.yml']:
-        # ignore ['tags', 'annotations'] for now
-
-        dataset_uri = _reconstruct_uri(base_uri, object_key)
+    # Here, we just brute-force attempt registration at every object write
+    # as notifications may appear in arbitrary order. Another option might
+    # be to look out for either the README.yml or the the 'dtool' object
+    # of the respective UUID that finalizes creation of a dataset.
+    dataset_uri = _reconstruct_uri(base_uri, object_key)
 
     if dataset_uri is not None:
         try:
