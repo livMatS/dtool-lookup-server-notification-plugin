@@ -128,6 +128,33 @@ Within a containerized environment such as launched with `docker-compose` ,
 host names containing underscores ``_`` may occur, but minio refuses to speak with
 such.
 
+Configure webhook in NetApp StorageGRID
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+NetAPP StorageGRID is able to submit S3 event notifications when configured to
+communicate with an SNS endpoint, refer to the according sections of the 
+`NetApp StorageGRID docs <https://docs.netapp.com/sgws-115/index.jsp>`_ for 
+`creating service endpoints <https://docs.netapp.com/sgws-115/topic/com.netapp.doc.sg-tenant-admin/GUID-D98D1AB1-A82A-46AC-88C5-FC53353A29AE.html>`_
+and
+`configuring event notifications <https://docs.netapp.com/sgws-115/topic/com.netapp.doc.sg-tenant-admin/GUID-F2555EFF-C99B-4F83-9009-C8D59F9EA545.html>`_.
+
+In short, create an endpoint ```http://dtool-lookup-server:5000/webhook/notify```
+with a suitable URN, i.e. `urn:dtool-lookup-server:sns:region:notify:all`,
+where you may pick all fields freely except ``urn`` and ``sns``. 
+
+Next, enable event notifications for the desired bucket, i.e. for object creation events with a policy snippet like this:
+
+.. code-block:: xml
+
+    <NotificationConfiguration>
+      <TopicConfiguration>
+        <Id>Object created</Id>
+        <Topic>urn:dtool-lookup-server:sns:region:notify:all</Topic>
+        <Event>s3:ObjectCreated:*</Event>
+      </TopicConfiguration>
+    </NotificationConfiguration>
+
+
 Querying server plugin configuration
 ------------------------------------
 
