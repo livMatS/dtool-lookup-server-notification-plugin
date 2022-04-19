@@ -5,7 +5,6 @@ import urllib
 
 from flask import (
     abort,
-    Blueprint,
     jsonify,
     request
 )
@@ -13,6 +12,10 @@ from flask import (
 from flask_jwt_extended import (
     jwt_required,
 )
+
+from flask_smorest import Blueprint
+
+from marshmallow.fields import Dict
 
 import dtoolcore
 
@@ -275,6 +278,7 @@ webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 # strict_slashes=False matches '/notify' and '/notify/'
 @webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'], strict_slashes=False)
 @webhook_bp.route('/notify/<path:path>', methods=['POST'])
+@webhook_bp.response(200, Dict)
 @filter_ips
 def notify(path):
     """Notify the lookup server about creation, modification or deletion of a
@@ -326,6 +330,7 @@ def notify(path):
 
 
 @webhook_bp.route("/config", methods=["GET"])
+@webhook_bp.response(200, Dict)
 @jwt_required()
 def plugin_config():
     """Return the JSON-serialized plugin configuration."""
