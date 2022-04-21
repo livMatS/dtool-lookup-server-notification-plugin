@@ -15,8 +15,6 @@ from flask_jwt_extended import (
 
 from flask_smorest import Blueprint
 
-from marshmallow.fields import Dict
-
 import dtoolcore
 
 from dtool_lookup_server import (
