@@ -28,6 +28,7 @@ from dtool_lookup_server import (
 from dtool_lookup_server.sql_models import (
     Dataset,
 )
+from dtool_lookup_server.schemas import ConfigSchema
 from dtool_lookup_server.utils import (
     generate_dataset_info,
     register_dataset,
@@ -193,8 +194,6 @@ def _process_object_created(base_uri, object_key):
                      "creation of a complete dataset or update of its metadata. "
                      "Ignored."), object_key, base_uri)
 
-    return {}
-
 
 def _process_object_removed(base_uri, object_key):
     """Notify the lookup server about deletion of an object."""
@@ -220,12 +219,9 @@ def _process_object_removed(base_uri, object_key):
         # https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html#pymongo.collection.Collection.delete_one
         mongo.db[MONGO_COLLECTION].delete_one({"uri": {"$eq": uri}})
 
-    return {}
-
 
 def _process_event(event_name, event_data):
     """"Delegate S3 notification event processing o correct handler."""
-    response = {}
     # TODO: consider s3SchemaVersion
 
     if event_name in [*OBJECT_CREATED_EVENT_NAMES, *OBJECT_REMOVED_EVENT_NAMES]:
@@ -259,15 +255,13 @@ def _process_event(event_name, event_data):
 
         if event_name in OBJECT_CREATED_EVENT_NAMES:
             logger.info("Object '%s' created within '%s'", object_key, base_uri)
-            response = _process_object_created(base_uri, object_key)
+            _process_object_created(base_uri, object_key)
         elif event_name in OBJECT_REMOVED_EVENT_NAMES:
             logger.info("Object '%s' removed from '%s'", object_key, base_uri)
-            response = _process_object_removed(base_uri, object_key)
+            _process_object_removed(base_uri, object_key)
 
     else:
         logger.info("Event '%s' ignored.", event_name)
-
-    return response
 
 
 webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
@@ -278,7 +272,7 @@ webhook_bp = Blueprint("webhook", __name__, url_prefix="/webhook")
 # strict_slashes=False matches '/notify' and '/notify/'
 @webhook_bp.route('/notify', defaults={'path': ''}, methods=['POST'], strict_slashes=False)
 @webhook_bp.route('/notify/<path:path>', methods=['POST'])
-@webhook_bp.response(200, Dict)
+@webhook_bp.response(200)
 @filter_ips
 def notify(path):
     """Notify the lookup server about creation, modification or deletion of a
@@ -309,7 +303,7 @@ def notify(path):
         # health check: NetApp Storage GRID performs a health check post request,
         # but attaches content of type 'application/x-www-form-urlencoded', i.e.
         #  Action=Publish&Message=StorageGRID+Test+Message&TopicArn=urn%3Atest%3Asns%3Atest%3Atest%3Atest&Version=2010-03-31
-        return {}
+        return
 
     logger.debug("Records:")
     _log_nested(logger.debug, json_content['Records'])
@@ -317,20 +311,20 @@ def notify(path):
     try:
         event_name = json_content['Records'][0]['eventName']
     except KeyError:
-        logger.error("No 'eventName' in 'Records''.")
-        abort(400)
+        error_msg = "No 'eventName' in 'Records''."
+        logger.error(error_msg)
+        abort(400, message=error_msg)
 
     try:
         event_data = json_content['Records'][0]['s3']
     except KeyError:
-        logger.error("No 's3' in 'Records'.")
-        abort(400)
-
-    return jsonify(_process_event(event_name, event_data))
+        error_msg = "No 's3' in 'Records'."
+        logger.error(error_msg)
+        abort(400, message=error_msg)
 
 
 @webhook_bp.route("/config", methods=["GET"])
-@webhook_bp.response(200, Dict)
+@webhook_bp.response(200, ConfigSchema)
 @jwt_required()
 def plugin_config():
     """Return the JSON-serialized plugin configuration."""
